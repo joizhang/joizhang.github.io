@@ -5,15 +5,21 @@
   
 
   
-  <title>Joizhang&#39;s blog</title>
+  <title>Netty如何处理TCP粘包问题？ | Joizhang&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Joizhang&#39;s blog">
-<meta property="og:url" content="https://joizhang.github.io/index.html">
+  <meta name="description" content="在开发naive-rpc过程中需要处理TCP粘包的问题，此处通过网上的一些资料进行了总结。  为什么TCP协议有粘包问题？当应用层协议使用TCP协议传输数据时，TCP协议可能会将应用层发送的数据拆分成多个包依次发送，而数据的接收方收到的数据段可能由多个”应用层包“组成，因此当应用层从TCP缓冲区读取数据并发现粘包时，需要将收到的数据进行拆分。 粘包不是TCP协议造成的，而是应用层协议设计者对TC">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Netty如何处理TCP粘包问题？">
+<meta property="og:url" content="https://joizhang.github.io/2023/02/18/Netty%E5%A6%82%E4%BD%95%E5%A4%84%E7%90%86TCP%E7%B2%98%E5%8C%85%E9%97%AE%E9%A2%98%EF%BC%9F/index.html">
 <meta property="og:site_name" content="Joizhang&#39;s blog">
+<meta property="og:description" content="在开发naive-rpc过程中需要处理TCP粘包的问题，此处通过网上的一些资料进行了总结。  为什么TCP协议有粘包问题？当应用层协议使用TCP协议传输数据时，TCP协议可能会将应用层发送的数据拆分成多个包依次发送，而数据的接收方收到的数据段可能由多个”应用层包“组成，因此当应用层从TCP缓冲区读取数据并发现粘包时，需要将收到的数据进行拆分。 粘包不是TCP协议造成的，而是应用层协议设计者对TC">
 <meta property="og:locale">
+<meta property="og:image" content="https://s2.loli.net/2023/02/18/rwbaAfZIQNHOLey.png">
+<meta property="article:published_time" content="2023-02-18T13:18:20.000Z">
+<meta property="article:modified_time" content="2023-02-18T14:29:29.432Z">
 <meta property="article:author" content="Joizhang">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s2.loli.net/2023/02/18/rwbaAfZIQNHOLey.png">
   
     <link rel="alternate" href="/atom.xml" title="Joizhang&#39;s blog" type="application/atom+xml">
   
@@ -62,9 +68,7 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-    <article id="post-Netty如何处理TCP粘包问题？" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-Netty如何处理TCP粘包问题？" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2023/02/18/Netty%E5%A6%82%E4%BD%95%E5%A4%84%E7%90%86TCP%E7%B2%98%E5%8C%85%E9%97%AE%E9%A2%98%EF%BC%9F/" class="article-date">
   <time datetime="2023-02-18T13:18:20.000Z" itemprop="datePublished">2023-02-18</time>
@@ -77,8 +81,8 @@
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2023/02/18/Netty%E5%A6%82%E4%BD%95%E5%A4%84%E7%90%86TCP%E7%B2%98%E5%8C%85%E9%97%AE%E9%A2%98%EF%BC%9F/">Netty如何处理TCP粘包问题？</a>
+    <h1 class="article-title" itemprop="name">
+      Netty如何处理TCP粘包问题？
     </h1>
   
 
@@ -189,11 +193,9 @@
     </footer>
   </div>
   
-</article>
-
-
+    
   
-
+</article>
 
 </section>
         
