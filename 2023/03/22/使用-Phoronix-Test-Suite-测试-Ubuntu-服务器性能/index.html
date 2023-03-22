@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>使用 Phoronix Test Suite 测试 Ubuntu 服务器性能 | Joizhang&#39;s blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="为后续比较不同框架的性能，需要先测试服务器的性能。本文介绍如何使用Phoronix Test Suite 测试 Ubuntu 服务器性能。  1. 安装 Phoronix Test Suite从 https:&#x2F;&#x2F;phoronix-test-suite.com&#x2F;?k&#x3D;downloads 获得最新的测试套件下载地址，使用以下命令进行下载： 1wget https:&#x2F;&#x2F;phoronix-test-su">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用 Phoronix Test Suite 测试 Ubuntu 服务器性能">
+<meta property="og:url" content="https://joizhang.github.io/2023/03/22/%E4%BD%BF%E7%94%A8-Phoronix-Test-Suite-%E6%B5%8B%E8%AF%95-Ubuntu-%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%80%A7%E8%83%BD/index.html">
+<meta property="og:site_name" content="Joizhang&#39;s blog">
+<meta property="og:description" content="为后续比较不同框架的性能，需要先测试服务器的性能。本文介绍如何使用Phoronix Test Suite 测试 Ubuntu 服务器性能。  1. 安装 Phoronix Test Suite从 https:&#x2F;&#x2F;phoronix-test-suite.com&#x2F;?k&#x3D;downloads 获得最新的测试套件下载地址，使用以下命令进行下载： 1wget https:&#x2F;&#x2F;phoronix-test-su">
+<meta property="og:locale">
+<meta property="article:published_time" content="2023-03-22T08:20:49.000Z">
+<meta property="article:modified_time" content="2023-03-22T13:17:44.605Z">
+<meta property="article:author" content="Joizhang">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Joizhang&#39;s blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.ico">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Joizhang&#39;s blog</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://joizhang.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-使用-Phoronix-Test-Suite-测试-Ubuntu-服务器性能" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2023/03/22/%E4%BD%BF%E7%94%A8-Phoronix-Test-Suite-%E6%B5%8B%E8%AF%95-Ubuntu-%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%80%A7%E8%83%BD/" class="article-date">
+  <time datetime="2023-03-22T08:20:49.000Z" itemprop="datePublished">2023-03-22</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      使用 Phoronix Test Suite 测试 Ubuntu 服务器性能
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>为后续比较不同框架的性能，需要先测试服务器的性能。本文介绍如何使用Phoronix Test Suite 测试 Ubuntu 服务器性能。</p>
+</blockquote>
+<h2 id="1-安装-Phoronix-Test-Suite"><a href="#1-安装-Phoronix-Test-Suite" class="headerlink" title="1. 安装 Phoronix Test Suite"></a>1. 安装 Phoronix Test Suite</h2><p>从 <a target="_blank" rel="noopener" href="https://phoronix-test-suite.com/?k=downloads">https://phoronix-test-suite.com/?k=downloads</a> 获得最新的测试套件下载地址，使用以下命令进行下载：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget https://phoronix-test-suite.com/releases/repo/pts.debian/files/phoronix-test-suite_10.8.4_all.deb</span><br></pre></td></tr></table></figure>
+
+<p>输入以下命令安装 Phoronix Test Suite：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo dpkg -i phoronix*.deb</span><br></pre></td></tr></table></figure>
+
+<span id="more"></span>
+
+<p>安装会因为仍有未满足的依赖而出错。您可以使用单个命令修复该错误并完成安装。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install -f</span><br></pre></td></tr></table></figure>
+
+<p>一旦满足所有依赖关系，安装将完成。您可以使用以下方法验证安装:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">phoronix-test-suite</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-安装测试套件"><a href="#2-安装测试套件" class="headerlink" title="2. 安装测试套件"></a>2. 安装测试套件</h2><p>Phoronix Test Suite 提供了很多测试套件，可以使用以下命令查看可用的测试套件：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">phoronix-test-suite list-available-tests</span><br></pre></td></tr></table></figure>
+
+<p>现在，可以使用以下命令安装测试套件：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">phoronix-test-suite install pts/processor pts/memory pts/disk pts/network</span><br></pre></td></tr></table></figure>
+
+<p>这将下载和安装四个测试套件：CPU、内存、磁盘和网络。</p>
+<h2 id="3-运行测试"><a href="#3-运行测试" class="headerlink" title="3. 运行测试"></a>3. 运行测试</h2><p>在终端中输入以下命令运行测试：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">phoronix-test-suite run pts/processor pts/memory pts/disk pts/network</span><br></pre></td></tr></table></figure>
+
+<p>此命令将运行所有四个测试套件。</p>
+<p>测试过程中，Phoronix Test Suite 会向您询问是否允许上传测试结果。如果您允许，测试结果将会被 Phoronix Test Suite 上传到公共数据库中，用于供他人参考。如果您不希望上传测试结果，可以选择 No。</p>
+<p>测试完成后，您可以在终端中查看测试结果。例如，查看 CPU 测试结果可以输入以下命令：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">phoronix-test-suite show-result pts/processor</span><br></pre></td></tr></table></figure>
+
+<p>这将列出最近一次 CPU 测试的详细结果，包括测试运行时间、测试得分等信息。</p>
+<p>Phoronix Test Suite 还有许多其他功能和测试套件，可以使用以下命令查看：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">phoronix-test-suite --help</span><br></pre></td></tr></table></figure>
+
+<p>上述是使用 Phoronix Test Suite 测试 Ubuntu 服务器性能的详细步骤。</p>
+<h2 id="4-系统概览"><a href="#4-系统概览" class="headerlink" title="4. 系统概览"></a>4. 系统概览</h2><h3 id="4-1-操作系统"><a href="#4-1-操作系统" class="headerlink" title="4.1 操作系统"></a>4.1 操作系统</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">~$ uname -a</span><br><span class="line">Linux server-04 5.15.0-67-generic #74~20.04.1-Ubuntu SMP Wed Feb 22 14:52:34 UTC 2023 x86_64 x86_64 x86_64 GNU/Linux</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-2-CPU"><a href="#4-2-CPU" class="headerlink" title="4.2 CPU"></a>4.2 CPU</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">~$ lscpu</span><br><span class="line">Architecture:                    x86_64</span><br><span class="line">CPU op-mode(s):                  32-bit, 64-bit</span><br><span class="line">Byte Order:                      Little Endian</span><br><span class="line">Address sizes:                   45 bits physical, 48 bits virtual</span><br><span class="line">CPU(s):                          4</span><br><span class="line">On-line CPU(s) list:             0-3</span><br><span class="line">Thread(s) per core:              1</span><br><span class="line">Core(s) per socket:              1</span><br><span class="line">Socket(s):                       4</span><br><span class="line">NUMA node(s):                    1</span><br><span class="line">Vendor ID:                       GenuineIntel</span><br><span class="line">CPU family:                      6</span><br><span class="line">Model:                           142</span><br><span class="line">Model name:                      Intel(R) Core(TM) i7-8550U CPU @ 1.80GHz</span><br><span class="line">Stepping:                        10</span><br><span class="line">CPU MHz:                         1991.999</span><br><span class="line">BogoMIPS:                        3983.99</span><br><span class="line">Hypervisor vendor:               VMware</span><br><span class="line">Virtualization type:             full</span><br><span class="line">L1d cache:                       128 KiB</span><br><span class="line">L1i cache:                       128 KiB</span><br><span class="line">L2 cache:                        1 MiB</span><br><span class="line">L3 cache:                        32 MiB</span><br><span class="line">NUMA node0 CPU(s):               0-3</span><br><span class="line">Vulnerability Itlb multihit:     KVM: Mitigation: VMX unsupported</span><br><span class="line">Vulnerability L1tf:              Mitigation; PTE Inversion</span><br><span class="line">Vulnerability Mds:               Vulnerable: Clear CPU buffers attempted, no microcode; SMT Host state unknown</span><br><span class="line">Vulnerability Meltdown:          Mitigation; PTI</span><br><span class="line">Vulnerability Mmio stale data:   Vulnerable: Clear CPU buffers attempted, no microcode; SMT Host state unknown</span><br><span class="line">Vulnerability Retbleed:          Mitigation; IBRS</span><br><span class="line">Vulnerability Spec store bypass: Mitigation; Speculative Store Bypass disabled via prctl and seccomp</span><br><span class="line">Vulnerability Spectre v1:        Mitigation; usercopy/swapgs barriers and __user pointer sanitization</span><br><span class="line">Vulnerability Spectre v2:        Mitigation; IBRS, IBPB conditional, RSB filling, PBRSB-eIBRS Not affected</span><br><span class="line">Vulnerability Srbds:             Unknown: Dependent on hypervisor status</span><br><span class="line">Vulnerability Tsx async abort:   Not affected</span><br><span class="line">Flags:                           fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ss syscall nx pdpe1</span><br><span class="line">                                 gb rdtscp lm constant_tsc arch_perfmon nopl xtopology tsc_reliable nonstop_tsc cpuid tsc_known_freq pni pclmulqdq sss</span><br><span class="line">                                 e3 fma cx16 pcid sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand hypervisor lahf_lm ab</span><br><span class="line">                                 m 3dnowprefetch invpcid_single pti ssbd ibrs ibpb stibp fsgsbase tsc_adjust bmi1 avx2 smep bmi2 invpcid rdseed adx sm</span><br><span class="line">                                 ap clflushopt xsaveopt xsavec xgetbv1 xsaves arat flush_l1d arch_capabilities</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-3-内存"><a href="#4-3-内存" class="headerlink" title="4.3 内存"></a>4.3 内存</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">~$ free -m</span><br><span class="line">              total        used        free      shared  buff/cache   available</span><br><span class="line">Mem:           7915        1242        5421           7        1252        6424</span><br><span class="line">Swap:          2047           0        2047</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-4-硬盘"><a href="#4-4-硬盘" class="headerlink" title="4.4 硬盘"></a>4.4 硬盘</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">~$ lsblk</span><br><span class="line">NAME   MAJ:MIN RM   SIZE RO TYPE MOUNTPOINT</span><br><span class="line">loop0    7:0    0     4K  1 loop /snap/bare/5</span><br><span class="line">loop1    7:1    0  55.6M  1 loop /snap/core18/2708</span><br><span class="line">loop2    7:2    0  55.6M  1 loop /snap/core18/2714</span><br><span class="line">loop3    7:3    0  63.3M  1 loop /snap/core20/1828</span><br><span class="line">loop4    7:4    0  63.3M  1 loop /snap/core20/1852</span><br><span class="line">loop5    7:5    0   219M  1 loop /snap/gnome-3-34-1804/66</span><br><span class="line">loop6    7:6    0   219M  1 loop /snap/gnome-3-34-1804/77</span><br><span class="line">loop7    7:7    0 346.3M  1 loop /snap/gnome-3-38-2004/119</span><br><span class="line">loop8    7:8    0  64.8M  1 loop /snap/gtk-common-themes/1514</span><br><span class="line">loop9    7:9    0    51M  1 loop /snap/snap-store/518</span><br><span class="line">loop10   7:10   0  49.9M  1 loop /snap/snapd/18357</span><br><span class="line">loop11   7:11   0  49.9M  1 loop /snap/snapd/18596</span><br><span class="line">loop12   7:12   0    46M  1 loop /snap/snap-store/638</span><br><span class="line">loop13   7:13   0  91.7M  1 loop /snap/gtk-common-themes/1535</span><br><span class="line">sda      8:0    0    60G  0 disk </span><br><span class="line">├─sda1   8:1    0   512M  0 part /boot/efi</span><br><span class="line">├─sda2   8:2    0     1K  0 part </span><br><span class="line">└─sda5   8:5    0  59.5G  0 part /</span><br><span class="line">sr0     11:0    1  1024M  0 rom  </span><br></pre></td></tr></table></figure>
+
+<h3 id="4-5-网卡"><a href="#4-5-网卡" class="headerlink" title="4.5 网卡"></a>4.5 网卡</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">ifconfig -a</span><br><span class="line">br-5f529d0d41b2: flags=4099&lt;UP,BROADCAST,MULTICAST&gt;  mtu 1500</span><br><span class="line">        inet 172.19.0.1  netmask 255.255.0.0  broadcast 172.19.255.255</span><br><span class="line">        ether 02:42:1f:6f:e3:cc  txqueuelen 0  (Ethernet)</span><br><span class="line">        RX packets 0  bytes 0 (0.0 B)</span><br><span class="line">        RX errors 0  dropped 0  overruns 0  frame 0</span><br><span class="line">        TX packets 0  bytes 0 (0.0 B)</span><br><span class="line">        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0</span><br><span class="line"></span><br><span class="line">docker0: flags=4163&lt;UP,BROADCAST,RUNNING,MULTICAST&gt;  mtu 1500</span><br><span class="line">        inet 172.17.0.1  netmask 255.255.0.0  broadcast 172.17.255.255</span><br><span class="line">        inet6 fe80::42:f8ff:fe54:ea0d  prefixlen 64  scopeid 0x20&lt;link&gt;</span><br><span class="line">        ether 02:42:f8:54:ea:0d  txqueuelen 0  (Ethernet)</span><br><span class="line">        RX packets 12  bytes 1593 (1.5 KB)</span><br><span class="line">        RX errors 0  dropped 0  overruns 0  frame 0</span><br><span class="line">        TX packets 69  bytes 11349 (11.3 KB)</span><br><span class="line">        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0</span><br><span class="line"></span><br><span class="line">ens33: flags=4163&lt;UP,BROADCAST,RUNNING,MULTICAST&gt;  mtu 1500</span><br><span class="line">        inet 192.168.1.214  netmask 255.255.255.0  broadcast 192.168.1.255</span><br><span class="line">        inet6 fe80::1dae:479:19cc:70ea  prefixlen 64  scopeid 0x20&lt;link&gt;</span><br><span class="line">        ether 00:0c:29:5b:dd:6e  txqueuelen 1000  (Ethernet)</span><br><span class="line">        RX packets 3674  bytes 561073 (561.0 KB)</span><br><span class="line">        RX errors 0  dropped 0  overruns 0  frame 0</span><br><span class="line">        TX packets 2444  bytes 519957 (519.9 KB)</span><br><span class="line">        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0</span><br><span class="line"></span><br><span class="line">lo: flags=73&lt;UP,LOOPBACK,RUNNING&gt;  mtu 65536</span><br><span class="line">        inet 127.0.0.1  netmask 255.0.0.0</span><br><span class="line">        inet6 ::1  prefixlen 128  scopeid 0x10&lt;host&gt;</span><br><span class="line">        loop  txqueuelen 1000  (Local Loopback)</span><br><span class="line">        RX packets 158  bytes 16724 (16.7 KB)</span><br><span class="line">        RX errors 0  dropped 0  overruns 0  frame 0</span><br><span class="line">        TX packets 158  bytes 16724 (16.7 KB)</span><br><span class="line">        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0</span><br><span class="line"></span><br><span class="line">veth51a998d: flags=4163&lt;UP,BROADCAST,RUNNING,MULTICAST&gt;  mtu 1500</span><br><span class="line">        inet6 fe80::7400:78ff:fe06:f959  prefixlen 64  scopeid 0x20&lt;link&gt;</span><br><span class="line">        ether 76:00:78:06:f9:59  txqueuelen 0  (Ethernet)</span><br><span class="line">        RX packets 12  bytes 1761 (1.7 KB)</span><br><span class="line">        RX errors 0  dropped 0  overruns 0  frame 0</span><br><span class="line">        TX packets 111  bytes 15961 (15.9 KB)</span><br><span class="line">        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">~$ sudo ethtool ens33</span><br><span class="line">Settings for ens33:</span><br><span class="line">	Supported ports: [ TP ]</span><br><span class="line">	Supported link modes:   10baseT/Half 10baseT/Full </span><br><span class="line">	                        100baseT/Half 100baseT/Full </span><br><span class="line">	                        1000baseT/Full </span><br><span class="line">	Supported pause frame use: No</span><br><span class="line">	Supports auto-negotiation: Yes</span><br><span class="line">	Supported FEC modes: Not reported</span><br><span class="line">	Advertised link modes:  10baseT/Half 10baseT/Full </span><br><span class="line">	                        100baseT/Half 100baseT/Full </span><br><span class="line">	                        1000baseT/Full </span><br><span class="line">	Advertised pause frame use: No</span><br><span class="line">	Advertised auto-negotiation: Yes</span><br><span class="line">	Advertised FEC modes: Not reported</span><br><span class="line">	Speed: 1000Mb/s</span><br><span class="line">	Duplex: Full</span><br><span class="line">	Port: Twisted Pair</span><br><span class="line">	PHYAD: 0</span><br><span class="line">	Transceiver: internal</span><br><span class="line">	Auto-negotiation: on</span><br><span class="line">	MDI-X: off (auto)</span><br><span class="line">	Supports Wake-on: d</span><br><span class="line">	Wake-on: d</span><br><span class="line">	Current message level: 0x00000007 (7)</span><br><span class="line">			       drv probe link</span><br><span class="line">	Link detected: yes</span><br></pre></td></tr></table></figure>
+
+<h2 id="5-系统性能"><a href="#5-系统性能" class="headerlink" title="5. 系统性能"></a>5. 系统性能</h2><h3 id="5-1-CPU和内存的结果"><a href="#5-1-CPU和内存的结果" class="headerlink" title="5.1 CPU和内存的结果"></a>5.1 CPU和内存的结果</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line">$ phoronix-test-suite benchmark sysbench</span><br><span class="line">Sysbench 1.0.20:</span><br><span class="line">    pts/sysbench-1.1.0 [Test: RAM / Memory]</span><br><span class="line">    Test 1 of 2</span><br><span class="line">    Estimated Trial Run Count:    3                     </span><br><span class="line">    Estimated Test Run-Time:      1 Minute              </span><br><span class="line">    Estimated Time To Completion: 2 Minutes [05:58 CDT] </span><br><span class="line">        Started Run 1 @ 05:57:50</span><br><span class="line">        Started Run 2 @ 05:58:04</span><br><span class="line">        Started Run 3 @ 05:58:18</span><br><span class="line"></span><br><span class="line">    Test: RAM / Memory:</span><br><span class="line">        9888.62</span><br><span class="line">        10091.24</span><br><span class="line">        10124.62</span><br><span class="line"></span><br><span class="line">    Average: 10034.83 MiB/sec</span><br><span class="line">    Deviation: 1.27%</span><br><span class="line"></span><br><span class="line">    Comparison of 727 OpenBenchmarking.org samples since 13 March 2021; median result: 6516 MiB/sec. Box plot of samples:</span><br><span class="line">    ......</span><br><span class="line">    This Result (69th Percentile): 10035 ^</span><br><span class="line">    ......</span><br><span class="line"></span><br><span class="line">Sysbench 1.0.20:</span><br><span class="line">    pts/sysbench-1.1.0 [Test: CPU]</span><br><span class="line">    Test 2 of 2</span><br><span class="line">    Estimated Trial Run Count:    3                    </span><br><span class="line">    Estimated Time To Completion: 1 Minute [05:59 CDT] </span><br><span class="line">        Started Run 1 @ 05:58:39</span><br><span class="line">        Started Run 2 @ 06:00:13</span><br><span class="line">        Started Run 3 @ 06:01:47</span><br><span class="line">        Started Run 4 @ 06:03:21 *</span><br><span class="line">        Started Run 5 @ 06:04:55 *</span><br><span class="line">        Started Run 6 @ 06:06:29 *</span><br><span class="line">        Started Run 7 @ 06:08:03 *</span><br><span class="line">        Started Run 8 @ 06:09:37 *</span><br><span class="line">        Started Run 9 @ 06:11:11 *</span><br><span class="line">        Started Run 10 @ 06:12:45 *</span><br><span class="line"></span><br><span class="line">    Test: CPU:</span><br><span class="line">        4196.65</span><br><span class="line">        3900.47</span><br><span class="line">        4089.39</span><br><span class="line">        4047.88</span><br><span class="line">        3886.9</span><br><span class="line">        3927.44</span><br><span class="line">        4044.44</span><br><span class="line">        3966.36</span><br><span class="line">        3956.51</span><br><span class="line">        3947.3</span><br><span class="line"></span><br><span class="line">    Average: 3996.33 Events Per Second</span><br><span class="line">    Deviation: 2.43%</span><br><span class="line">    Samples: 10</span><br><span class="line"></span><br><span class="line">    Comparison of 3,029 OpenBenchmarking.org samples since 26 February 2011; median result: 16345 Events Per Second. Box plot of samples:</span><br><span class="line">    ......</span><br><span class="line">    This Result (20th Percentile): 3996</span><br><span class="line">    ......</span><br></pre></td></tr></table></figure>
+
+<p>CPU平均每秒3996.33个事件，一个事件表示一次素数计算。</p>
+<h3 id="5-2-网络"><a href="#5-2-网络" class="headerlink" title="5.2 网络"></a>5.2 网络</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br></pre></td><td class="code"><pre><span class="line">Sockperf 3.4:</span><br><span class="line">    pts/sockperf-1.0.0 [Test: Throughput]</span><br><span class="line">    Test 1 of 22</span><br><span class="line">    Estimated Trial Run Count:    5                              </span><br><span class="line">    Estimated Test Run-Time:      3 Minutes                      </span><br><span class="line">    Estimated Time To Completion: 1 Hour, 47 Minutes [08:42 CDT] </span><br><span class="line">        Started Run 1 @ 06:55:37</span><br><span class="line">        Started Run 2 @ 06:55:49</span><br><span class="line">        Started Run 3 @ 06:56:02</span><br><span class="line">        Started Run 4 @ 06:56:14</span><br><span class="line">        Started Run 5 @ 06:56:26</span><br><span class="line">        Started Run 6 @ 06:56:38 *</span><br><span class="line">        Started Run 7 @ 06:56:51 *</span><br><span class="line">        Started Run 8 @ 06:57:03 *</span><br><span class="line">        Started Run 9 @ 06:57:15 *</span><br><span class="line">        Started Run 10 @ 06:57:27 *</span><br><span class="line">        Started Run 11 @ 06:57:40 *</span><br><span class="line">        Started Run 12 @ 06:57:52 *</span><br><span class="line">        Started Run 13 @ 06:58:04 *</span><br><span class="line">        Started Run 14 @ 06:58:16 *</span><br><span class="line">        Started Run 15 @ 06:58:28 *</span><br><span class="line">        Started Run 16 @ 06:58:41 *</span><br><span class="line">        Started Run 17 @ 06:58:53 *</span><br><span class="line">        Started Run 18 @ 06:59:05 *</span><br><span class="line">        Started Run 19 @ 06:59:17 *</span><br><span class="line">        Started Run 20 @ 06:59:30 *</span><br><span class="line">        Started Run 21 @ 06:59:42 *</span><br><span class="line">        Started Run 22 @ 06:59:54 *</span><br><span class="line">        Started Run 23 @ 07:00:06 *</span><br><span class="line">        Started Run 24 @ 07:00:18 *</span><br><span class="line">        Started Run 25 @ 07:00:31 *</span><br><span class="line"></span><br><span class="line">    Test: Throughput:</span><br><span class="line">        227944</span><br><span class="line">        225671</span><br><span class="line">        232951</span><br><span class="line">        230071</span><br><span class="line">        199100</span><br><span class="line">        229712</span><br><span class="line">        230344</span><br><span class="line">        226415</span><br><span class="line">        233096</span><br><span class="line">        227568</span><br><span class="line">        213177</span><br><span class="line">        231401</span><br><span class="line">        227420</span><br><span class="line">        234678</span><br><span class="line">        230548</span><br><span class="line">        228402</span><br><span class="line">        224917</span><br><span class="line">        227756</span><br><span class="line">        224804</span><br><span class="line">        222024</span><br><span class="line">        232606</span><br><span class="line">        231657</span><br><span class="line">        232363</span><br><span class="line">        226476</span><br><span class="line">        228106</span><br><span class="line"></span><br><span class="line">    Average: 227168 Messages Per Second</span><br><span class="line">    Deviation: 3.22%</span><br><span class="line">    Samples: 25</span><br><span class="line"></span><br><span class="line">    Comparison of 1,431 OpenBenchmarking.org samples since 28 May 2018 to 7 February; median result: 456890 Messages Per Second. Box plot of samples:</span><br><span class="line">    ...</span><br><span class="line">    This Result (13th Percentile): 227168</span><br><span class="line">    ...</span><br><span class="line"></span><br><span class="line">Sockperf 3.4:</span><br><span class="line">    pts/sockperf-1.0.0 [Test: Latency Ping Pong]</span><br><span class="line">    Test 2 of 22</span><br><span class="line">    Estimated Trial Run Count:    5                              </span><br><span class="line">    Estimated Test Run-Time:      1 Minute                       </span><br><span class="line">    Estimated Time To Completion: 1 Hour, 42 Minutes [08:42 CDT] </span><br><span class="line">        Started Run 1 @ 07:00:50</span><br><span class="line">        Started Run 2 @ 07:01:03</span><br><span class="line">        Started Run 3 @ 07:01:15</span><br><span class="line">        Started Run 4 @ 07:01:27</span><br><span class="line">        Started Run 5 @ 07:01:39</span><br><span class="line"></span><br><span class="line">    Test: Latency Ping Pong:</span><br><span class="line">        62.401</span><br><span class="line">        61.115</span><br><span class="line">        60.166</span><br><span class="line">        60.756</span><br><span class="line">        61.167</span><br><span class="line"></span><br><span class="line">    Average: 61.121 usec</span><br><span class="line">    Deviation: 1.34%</span><br><span class="line"></span><br><span class="line">Sockperf 3.4:</span><br><span class="line">    pts/sockperf-1.0.0 [Test: Latency Under Load]</span><br><span class="line">    Test 3 of 22</span><br><span class="line">    Estimated Trial Run Count:    5                              </span><br><span class="line">    Estimated Test Run-Time:      1 Minute                       </span><br><span class="line">    Estimated Time To Completion: 1 Hour, 41 Minutes [08:42 CDT] </span><br><span class="line">        Started Run 1 @ 07:01:59</span><br><span class="line">        Started Run 2 @ 07:02:11</span><br><span class="line">        Started Run 3 @ 07:02:24</span><br><span class="line">        Started Run 4 @ 07:02:36</span><br><span class="line">        Started Run 5 @ 07:02:48</span><br><span class="line">        Started Run 6 @ 07:03:00 *</span><br><span class="line">        Started Run 7 @ 07:03:13 *</span><br><span class="line">        Started Run 8 @ 07:03:25 *</span><br><span class="line">        Started Run 9 @ 07:03:37 *</span><br><span class="line">        Started Run 10 @ 07:03:49 *</span><br><span class="line">        Started Run 11 @ 07:04:01 *</span><br><span class="line">        Started Run 12 @ 07:04:14 *</span><br><span class="line">        Started Run 13 @ 07:04:26 *</span><br><span class="line">        Started Run 14 @ 07:04:38 *</span><br><span class="line">        Started Run 15 @ 07:04:50 *</span><br><span class="line">        Started Run 16 @ 07:05:03 *</span><br><span class="line">        Started Run 17 @ 07:05:15 *</span><br><span class="line">        Started Run 18 @ 07:05:27 *</span><br><span class="line">        Started Run 19 @ 07:05:39 *</span><br><span class="line">        Started Run 20 @ 07:05:51 *</span><br><span class="line">        Started Run 21 @ 07:06:04 *</span><br><span class="line">        Started Run 22 @ 07:06:16 *</span><br><span class="line">        Started Run 23 @ 07:06:28 *</span><br><span class="line">        Started Run 24 @ 07:06:40 *</span><br><span class="line">        Started Run 25 @ 07:06:53 *</span><br><span class="line"></span><br><span class="line">    Test: Latency Under Load:</span><br><span class="line">        94.746</span><br><span class="line">        88.905</span><br><span class="line">        76.142</span><br><span class="line">        37.347</span><br><span class="line">        93.27</span><br><span class="line">        85.226</span><br><span class="line">        92.988</span><br><span class="line">        76.168</span><br><span class="line">        84.966</span><br><span class="line">        88.915</span><br><span class="line">        72.696</span><br><span class="line">        78.155</span><br><span class="line">        80.286</span><br><span class="line">        97.476</span><br><span class="line">        97.139</span><br><span class="line">        95.452</span><br><span class="line">        94.246</span><br><span class="line">        92.828</span><br><span class="line">        75.874</span><br><span class="line">        77.592</span><br><span class="line">        76.948</span><br><span class="line">        166.122</span><br><span class="line">        37.302</span><br><span class="line">        36.762</span><br><span class="line">        75.223</span><br><span class="line"></span><br><span class="line">    Average: 82.911 usec</span><br><span class="line">    Deviation: 29.99%</span><br><span class="line">    Samples: 25</span><br><span class="line"></span><br><span class="line">    Comparison of 755 OpenBenchmarking.org samples since 28 May 2018 to 7 February; median result: 21.23 usec. Box plot of samples:</span><br><span class="line">    ...</span><br><span class="line">    This Result (5th Percentile): 82.911 ^</span><br><span class="line">    ...</span><br></pre></td></tr></table></figure>
+
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
+<li>ChatGPT</li>
+<li><a target="_blank" rel="noopener" href="https://www.techrepublic.com/article/benchmark-ubuntu-linux-servers-phoronix-test-suite/">How to benchmark your Ubuntu Linux servers with the Phoronix Test Suite</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/ggjucheng/archive/2013/01/14/2859613.html">Linux 查看系统硬件信息(实例详解)</a></li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://joizhang.github.io/2023/03/22/%E4%BD%BF%E7%94%A8-Phoronix-Test-Suite-%E6%B5%8B%E8%AF%95-Ubuntu-%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%80%A7%E8%83%BD/" data-id="clfjpdi5b0000lj104sa57h46" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2023/02/18/Netty%E5%A6%82%E4%BD%95%E5%A4%84%E7%90%86TCP%E7%B2%98%E5%8C%85%E9%97%AE%E9%A2%98%EF%BC%9F/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Netty如何处理TCP粘包问题？</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Netty/" rel="tag">Netty</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TCP/" rel="tag">TCP</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Java/" style="font-size: 10px;">Java</a> <a href="/tags/Netty/" style="font-size: 10px;">Netty</a> <a href="/tags/TCP/" style="font-size: 10px;">TCP</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/03/">March 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/02/">February 2023</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2023/03/22/%E4%BD%BF%E7%94%A8-Phoronix-Test-Suite-%E6%B5%8B%E8%AF%95-Ubuntu-%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%80%A7%E8%83%BD/">使用 Phoronix Test Suite 测试 Ubuntu 服务器性能</a>
+          </li>
+        
+          <li>
+            <a href="/2023/02/18/Netty%E5%A6%82%E4%BD%95%E5%A4%84%E7%90%86TCP%E7%B2%98%E5%8C%85%E9%97%AE%E9%A2%98%EF%BC%9F/">Netty如何处理TCP粘包问题？</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2023 Joizhang<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>
