@@ -64,6 +64,51 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-InstructGPT-论翻译与解读" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2023/04/01/InstructGPT-%E8%AE%BA%E7%BF%BB%E8%AF%91%E4%B8%8E%E8%A7%A3%E8%AF%BB/" class="article-date">
+  <time datetime="2023-04-01T04:38:45.000Z" itemprop="datePublished">2023-04-01</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2023/04/01/InstructGPT-%E8%AE%BA%E7%BF%BB%E8%AF%91%E4%B8%8E%E8%A7%A3%E8%AF%BB/">InstructGPT 论翻译与解读</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>此篇博文主要结合原论文和沐神的<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1hd4y187CR/?spm_id_from=333.337.search-card.all.click&vd_source=bbd4df76474768fcb191b31829c49c6b">InstructGPT 论文精读【论文精读·48】</a>视频进行解读。</p>
+<h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>论文名为《Training language models to follow instructions with human feedback》，该论文发表于 2022-03-04，论文的作者由 20 位来自 OpenAI 的研究人员组成。题目直白的翻译是“使用人类反馈训练语言模型遵循指令”，意思是<strong>通过使用人类反馈来训练语言模型，使其能够更好地遵循用户的指令</strong>。</p>
+<h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>摘要主要介绍以下几点：</p>
+        
+          <p class="article-more-link">
+            <a href="/2023/04/01/InstructGPT-%E8%AE%BA%E7%BF%BB%E8%AF%91%E4%B8%8E%E8%A7%A3%E8%AF%BB/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://joizhang.github.io/2023/04/01/InstructGPT-%E8%AE%BA%E7%BF%BB%E8%AF%91%E4%B8%8E%E8%A7%A3%E8%AF%BB/" data-id="clhkn8qsf0000gll16y679aa1" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ChatGPT/" rel="tag">ChatGPT</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-使用-Phoronix-Test-Suite-测试-Ubuntu-服务器性能" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2023/03/22/%E4%BD%BF%E7%94%A8-Phoronix-Test-Suite-%E6%B5%8B%E8%AF%95-Ubuntu-%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%80%A7%E8%83%BD/" class="article-date">
@@ -86,14 +131,9 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <blockquote>
-<p>为后续比较不同框架的性能，需要先测试服务器的性能。本文介绍如何使用Phoronix Test Suite 测试 Ubuntu 服务器性能。</p>
-</blockquote>
+        <p>为后续比较不同框架的性能，需要先测试服务器的性能。本文介绍如何使用Phoronix Test Suite 测试 Ubuntu 服务器性能。</p>
 <h2 id="1-安装-Phoronix-Test-Suite"><a href="#1-安装-Phoronix-Test-Suite" class="headerlink" title="1. 安装 Phoronix Test Suite"></a>1. 安装 Phoronix Test Suite</h2><p>从 <a target="_blank" rel="noopener" href="https://phoronix-test-suite.com/?k=downloads">https://phoronix-test-suite.com/?k=downloads</a> 获得最新的测试套件下载地址，使用以下命令进行下载：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget https://phoronix-test-suite.com/releases/repo/pts.debian/files/phoronix-test-suite_10.8.4_all.deb</span><br></pre></td></tr></table></figure>
-
-<p>输入以下命令安装 Phoronix Test Suite：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo dpkg -i phoronix*.deb</span><br></pre></td></tr></table></figure>
         
           <p class="article-more-link">
             <a href="/2023/03/22/%E4%BD%BF%E7%94%A8-Phoronix-Test-Suite-%E6%B5%8B%E8%AF%95-Ubuntu-%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%80%A7%E8%83%BD/#more">Read More</a>
@@ -136,15 +176,8 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <blockquote>
-<p>在开发<a target="_blank" rel="noopener" href="https://github.com/joizhang/naive-rpc">naive-rpc</a>过程中需要处理TCP粘包的问题，此处通过网上的一些资料进行了总结。</p>
-</blockquote>
+        <p>在开发<a target="_blank" rel="noopener" href="https://github.com/joizhang/naive-rpc">naive-rpc</a>过程中需要处理TCP粘包的问题，此处结合网上的一些资料进行了总结。</p>
 <h2 id="1-为什么TCP协议有粘包问题？"><a href="#1-为什么TCP协议有粘包问题？" class="headerlink" title="1. 为什么TCP协议有粘包问题？"></a>1. 为什么TCP协议有粘包问题？</h2><p>当应用层协议使用TCP协议传输数据时，TCP协议可能会将应用层发送的数据拆分成多个包依次发送，而数据的接收方收到的数据段可能由多个”应用层包“组成，因此当应用层从TCP缓冲区读取数据并发现粘包时，需要将收到的数据进行拆分。</p>
-<p>粘包不是TCP协议造成的，而是应用层协议设计者对TCP协议的理解不够深入，他们忽略了TCP协议的定义，缺乏设计应用层协议的经验。在本文中，我们将从TCP协议和应用层协议两个方面来分析粘性数据包是如何在我们经常提到的TCP协议中出现的。</p>
-<ul>
-<li>TCP协议是面向字节流的协议，它可以合并或拆分应用层协议的数据。</li>
-<li>应用层协议没有定义消息的边界，导致数据的接收者不能缝合数据。</li>
-</ul>
         
           <p class="article-more-link">
             <a href="/2023/02/18/Netty%E5%A6%82%E4%BD%95%E5%A4%84%E7%90%86TCP%E7%B2%98%E5%8C%85%E9%97%AE%E9%A2%98%EF%BC%9F/#more">Read More</a>
@@ -178,7 +211,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Netty/" rel="tag">Netty</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TCP/" rel="tag">TCP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%80%A7%E8%83%BD/" rel="tag">性能</a></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ChatGPT/" rel="tag">ChatGPT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Netty/" rel="tag">Netty</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TCP/" rel="tag">TCP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%80%A7%E8%83%BD/" rel="tag">性能</a></li></ul>
     </div>
   </div>
 
@@ -188,7 +221,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/Java/" style="font-size: 10px;">Java</a> <a href="/tags/Netty/" style="font-size: 10px;">Netty</a> <a href="/tags/TCP/" style="font-size: 10px;">TCP</a> <a href="/tags/%E6%80%A7%E8%83%BD/" style="font-size: 10px;">性能</a>
+      <a href="/tags/ChatGPT/" style="font-size: 10px;">ChatGPT</a> <a href="/tags/Java/" style="font-size: 10px;">Java</a> <a href="/tags/Netty/" style="font-size: 10px;">Netty</a> <a href="/tags/TCP/" style="font-size: 10px;">TCP</a> <a href="/tags/%E6%80%A7%E8%83%BD/" style="font-size: 10px;">性能</a>
     </div>
   </div>
 
@@ -197,7 +230,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/03/">March 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/02/">February 2023</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/04/">April 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/03/">March 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/02/">February 2023</a></li></ul>
     </div>
   </div>
 
@@ -208,6 +241,10 @@
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2023/04/01/InstructGPT-%E8%AE%BA%E7%BF%BB%E8%AF%91%E4%B8%8E%E8%A7%A3%E8%AF%BB/">InstructGPT 论翻译与解读</a>
+          </li>
         
           <li>
             <a href="/2023/03/22/%E4%BD%BF%E7%94%A8-Phoronix-Test-Suite-%E6%B5%8B%E8%AF%95-Ubuntu-%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%80%A7%E8%83%BD/">使用 Phoronix Test Suite 测试 Ubuntu 服务器性能</a>

@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>InstructGPT 论翻译与解读 | Joizhang&#39;s blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="此篇博文主要结合原论文和沐神的InstructGPT 论文精读【论文精读·48】视频进行解读。 题目论文名为《Training language models to follow instructions with human feedback》，该论文发表于 2022-03-04，论文的作者由 20 位来自 OpenAI 的研究人员组成。题目直白的翻译是“使用人类反馈训练语言模型遵循指令”，意思">
+<meta property="og:type" content="article">
+<meta property="og:title" content="InstructGPT 论翻译与解读">
+<meta property="og:url" content="https://joizhang.github.io/2023/04/01/InstructGPT-%E8%AE%BA%E7%BF%BB%E8%AF%91%E4%B8%8E%E8%A7%A3%E8%AF%BB/index.html">
+<meta property="og:site_name" content="Joizhang&#39;s blog">
+<meta property="og:description" content="此篇博文主要结合原论文和沐神的InstructGPT 论文精读【论文精读·48】视频进行解读。 题目论文名为《Training language models to follow instructions with human feedback》，该论文发表于 2022-03-04，论文的作者由 20 位来自 OpenAI 的研究人员组成。题目直白的翻译是“使用人类反馈训练语言模型遵循指令”，意思">
+<meta property="og:locale">
+<meta property="og:image" content="https://cdn.openai.com/instruction-following/draft-20220126f/methods.svg">
+<meta property="og:image" content="https://s2.loli.net/2023/05/12/JOzXIqmUdx3bNeA.png">
+<meta property="og:image" content="https://s2.loli.net/2023/05/12/F7idxEve3BICj4o.png">
+<meta property="article:published_time" content="2023-04-01T04:38:45.000Z">
+<meta property="article:modified_time" content="2023-05-12T14:17:48.280Z">
+<meta property="article:author" content="Joizhang">
+<meta property="article:tag" content="ChatGPT">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.openai.com/instruction-following/draft-20220126f/methods.svg">
+  
+    <link rel="alternate" href="/atom.xml" title="Joizhang&#39;s blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.ico">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Joizhang&#39;s blog</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://joizhang.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-InstructGPT-论翻译与解读" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2023/04/01/InstructGPT-%E8%AE%BA%E7%BF%BB%E8%AF%91%E4%B8%8E%E8%A7%A3%E8%AF%BB/" class="article-date">
+  <time datetime="2023-04-01T04:38:45.000Z" itemprop="datePublished">2023-04-01</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      InstructGPT 论翻译与解读
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>此篇博文主要结合原论文和沐神的<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1hd4y187CR/?spm_id_from=333.337.search-card.all.click&vd_source=bbd4df76474768fcb191b31829c49c6b">InstructGPT 论文精读【论文精读·48】</a>视频进行解读。</p>
+<h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>论文名为《Training language models to follow instructions with human feedback》，该论文发表于 2022-03-04，论文的作者由 20 位来自 OpenAI 的研究人员组成。题目直白的翻译是“使用人类反馈训练语言模型遵循指令”，意思是<strong>通过使用人类反馈来训练语言模型，使其能够更好地遵循用户的指令</strong>。</p>
+<h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>摘要主要介绍以下几点：</p>
+<span id="more"></span>
+
+<ol>
+<li>研究背景及现状：让语言模型变得更大并不能让它们更好地理解用户的意图。例如，大型语言模型会产生不真实、有害或对用户毫无帮助的输出。换句话说，这些模型没有与用户对齐（<strong>aligned</strong>）。</li>
+<li>提出的解决方法：论文展示了一种途径，通过人类反馈进行微调，使语言模型与用户在各种任务上的意图保持一致。<ol>
+<li>首先使用两种方式收集了一组自然语言提示，一种是由标注人员编写的提示，另一种是通过 OpenAI API 提交的提示（Prompt）。然后，作者使用这些提示来收集标注人员所需的模型行为的演示数据集，并使用监督学习方法对 GPT-3 进行微调（注意，此处是指对已经过预训练的 GPT-3 模型进行微调）。这个过程旨在训练 GPT-3 遵循用户指令，并生成更符合用户意图的输出。</li>
+<li>然后，收集了一组模型输出的排名结果数据集，并使用强化学习方法从人类反馈中获得奖励信号，以指导模型生成更符合用户意图的输出。</li>
+</ol>
+</li>
+<li>取得的结果：最终的结果模型为 InstructGPT。在对提示分布进行人类评估时（此处翻译存疑），1.3B 参数的 InstructGPT 模型的输出优于 175B GPT-3 的输出，尽管参数少了 100 倍。此外，InstructGPT 模型在公共 NLP 数据集上显示了真实性的提高和有毒输出生成的减少，同时具有最小的性能退化。尽管 InstructGPT 仍然会犯一些简单的错误，但结果表明，利用人类反馈进行微调是使语言模型与人类意图一致的一个有希望的方向。</li>
+</ol>
+<h2 id="第一节-引言"><a href="#第一节-引言" class="headerlink" title="第一节 引言"></a>第一节 引言</h2><p>引言部分更详细的介绍了研究背景及现状、提出的解决方法、取得的成果以及 InstructGPT 的局限性。</p>
+<p>大型语言模型之所以表现出意料之外的行为，比如捏造事实、生成有偏见的或有害的文本，或者直接就不遵守用户指令的原因在于近期的大型语言模型使用的语言建模目标，即预测下一个词，与“安全而有益地遵循用户的指令”的目标是没有对齐的（<strong>misaligned</strong>）。因此通过一些手段来避免这些非预期的行为对于在数百个应用程序中部署和使用语言模型尤其重要。</p>
+<p>本文希望语言模型是<strong>有帮助的</strong>(它们应该帮助用户解决他们的任务)，<strong>诚实的</strong>(它们不应该捏造信息或误导用户)，<strong>无害的</strong>(它们不应该对人或环境造成身体、心理或社会伤害)。</p>
+<p>本文关注对齐语言模型的微调方法。具体而言，通过使用来自人类反馈的强化学习(非本文原创，之前已有 RLHF 相关的工作)对 GPT-3 进行微调，以遵循一大类编写好的指令(见图 2)。这种技术使用人类的偏好作为奖励信号来微调模型。作者团队首先根据候选人在筛选测试中的表现雇佣了一个由 40 名成员组成的团队，该雇佣团队主要负责数据标注(有关更多详细信息，请参见第 3.4 节和附录 B.1)。然后，作者团队收集提交给 OpenAI API 的提示(主要是英语)和一些标注人员编写的提示，基于这些提示收集了一个符合预期输出行为的人工演示数据集，并使用这个数据集来训练监督学习基线。接下来，作者团队收集了另外一个数据集，它是基线模型在一个更大的 API 提示集上的输出之间的人工标记的比较（模型有多个输出，标注人员标记哪个是他们偏好的）。然后，在这个数据集上训练一个奖励模型(RM)，以预测标注人员会喜欢哪个模型输出。最后，使用这个 RM 作为奖励函数，并使用 PPO 算法微调监督学习基线，以最大化这个奖励。图 2 中说明了这个过程。该过程将 GPT-3 的行为与特定人群(主要是标注人员和研究人员)的既定偏好联系起来，而不是任何更广泛的“人类价值”概念；5.2 节将进一步讨论这一点。最终得到结果模型为 InstructGPT。</p>
+<p><img src="https://cdn.openai.com/instruction-following/draft-20220126f/methods.svg" alt="图 2 本文方法三个步骤的图示：(1)监督微调(SFT)，(2)奖励模型(RM)训练，以及(3)通过近端策略优化(PPO)对该奖励模型进行强化学习。蓝色箭头表示该数据用于训练一个模型。在第二步中，方框A-D是模型中的样本，由标注人员进行排序。有关提出的方法的更多详细信息，请参见第3节。"></p>
+<p>在测试阶段，主要通过让标注人员在测试集上对模型输出的质量进行评级来评估模型的性能，该测试集由留出标注人员(他们没有在训练数据中表示)的提示组成。此外，还对一系列公共 NLP 数据集进行自动评估。模型包含三种大小(1.3B、6B 和 175B 参数)，并且所有模型都使用 GPT-3 架构。主要发现如下（只列出结论）:</p>
+<ul>
+<li>与 GPT-3 的输出相比，标注人员明显更喜欢 InstructGPT 的输出。</li>
+<li>与 GPT-3 相比，InstructGPT 模型在真实性方面有所提高。</li>
+<li>与 GPT-3 相比，InstructGPT 在毒性方面有小幅改善，但无偏倚。</li>
+<li>可以通过修改 RLHF 微调过程来最小化公共 NLP 数据集上的性能退化。</li>
+<li>模型能推广到不产生任何训练数据的“留出的”标注人员的偏好。</li>
+<li>公共的 NLP 数据集并不能很好的反映本文的语言模型是如何被使用的。</li>
+<li>InstructGPT 模型显示了对 RLHF 微调分布之外的指令的有希望的推广。</li>
+<li>InstructGPT 还是会犯简单的错误。</li>
+</ul>
+<h2 id="第二节-相关工作"><a href="#第二节-相关工作" class="headerlink" title="第二节 相关工作"></a>第二节 相关工作</h2><p>本节不进行展开，主要介绍以下几个相关工作：</p>
+<ul>
+<li>基于人类反馈的对齐和学习的研究。</li>
+<li>训练语言模型遵循指令。</li>
+<li>评估语言模型的危害。</li>
+<li>修改语言模型的行为以减轻伤害。</li>
+</ul>
+<h2 id="第三节-方法和实验细节"><a href="#第三节-方法和实验细节" class="headerlink" title="第三节 方法和实验细节"></a>第三节 方法和实验细节</h2><h3 id="3-1-方法总览"><a href="#3-1-方法总览" class="headerlink" title="3.1 方法总览"></a>3.1 方法总览</h3><p>遵从之前的工作，本文从一个预训练的语言模型、一个期望模型产生一致输出的提示分布以及一组训练有素的标注人员(详见第 3.4 节)开始。然后，本文应用以下三个步骤(图 2)。</p>
+<ul>
+<li>步骤 1：收集演示数据，并训练一个受监督的策略。标注人员在输入的提示分布上提供期望行为的演示(参见第 3.2 节了解该分布的详细信息)。然后，在该数据集上使用监督学习微调预训练的 GPT-3 模型。</li>
+<li>步骤 2：收集对比数据，训练奖励模型。本文收集模型输出之间的对比数据集，对于给定的输入，标注者需要指明他们更喜欢哪个输出。然后，基于此训练一个奖励模型来预测人类偏好的输出。</li>
+<li>步骤 3：针对奖励模型使用 PPO 优化一个策略。本文使用 RM 的输出作为标量奖励。使用 PPO 算法微调监督模型，以优化这种奖励。</li>
+</ul>
+<p>步骤 2 和 3 可以连续迭代；收集关于当前最佳策略的更多比较数据，用于训练新的 RM，然后训练新的策略。在实践中，大部分对比数据来自监督策略，有些来自 PPO 策略。</p>
+<h3 id="3-2-数据集"><a href="#3-2-数据集" class="headerlink" title="3.2 数据集"></a>3.2 数据集</h3><p>提示数据集主要由提交给 OpenAI API 的文本提示组成，特别是那些在 Playground 界面上（<a target="_blank" rel="noopener" href="https://beta.openai.com/playground">https://beta.openai.com/playground</a>）使用早期版本的 InstructGPT 模型(通过对演示数据子集进行监督学习来训练)的提示。Playground 会告知客户，他们的数据可能会进一步地用于训练模型。通知会在用户使用 InstructGPT 模型的时候重复进行。在本文中，将不使用来自在生产中客户使用 API 的数据。作者团队通过检查具有相同长前缀的提示，对提示进行启发式重复数据删除，并将提示数量限制为每个用户 ID 200 个。作者团队还基于用户 ID 创建训练、验证和测试切分，于是验证集和测试集不包含来自训练集中的用户的数据。为了避免模型学习潜在的敏感客户详细信息，文中过滤了训练切分中的所有包含个人身份信息的提示。</p>
+<p>为了训练第一个 InstructGPT 模型，作者要求标注人员自己编写提示。这是因为需要一个类似指令的提示的初始来源来引导这个过程，而这些类型的提示并不经常提交给 API 上的常规 GPT-3 模型。作者要求标注人员写出三种提示：</p>
+<ul>
+<li>Plain：要求标注者提出一个任意任务，同时确保任务具有足够的多样性。</li>
+<li>Few-shot：作者要求标注者提出一条指令，以及该指令的多个查询/响应对。</li>
+<li>User-based：作者在 OpenAI API 的候补名单申请中陈述了许多用例。作者要求标注者提出与这些用例相对应的提示。</li>
+</ul>
+<p>从这些提示中，生成了在模型微调过程中使用的三个不同的数据集：(1) SFT 数据集，用于训练 SFT 模型的标注人员演示，(2) RM 数据集，用于训练 RMs 的模型输出的标注人员排序，以及 (3) PPO 数据集，没有任何人类标签，用作 RLHF 微调的输入。SFT 数据集包含大约 13k 训练提示(来自 API 和标注人员编写)，RM 数据集具有 33k 训练提示(来自 API 和标注人员编写)，PPO 数据集具有 31k 训练提示(仅来自 API)。表 6 提供了有关数据集大小的更多详细信息。</p>
+<p>为了给数据集的组成一个直观的感受，在表1中，作者展示了API提示(特别是RM数据集)以及标注人员标注的用例的类别的分布。大多数用例都是生成性的，而不是分类或QA。本文还在表2中展示了一些说明性的提示(由研究人员编写，以模拟提交给InstructGPT模型的提示类型)；提交给InstructGPT模型的更多提示在附录A.2.1中展示，提交给GPT-3模型的提示在附录A.2.2中展示。在附录A中提供了有关数据集的更多详细信息。</p>
+<!-- ![表 1 API提示数据集的用例类别的分布。](https://s2.loli.net/2023/05/12/JOzXIqmUdx3bNeA.png) -->
+<img src="https://s2.loli.net/2023/05/12/JOzXIqmUdx3bNeA.png" width="190" />
+
+<p>表 1 API 提示数据集的用例类别的分布。</p>
+<!-- ![image.png](https://s2.loli.net/2023/05/12/F7idxEve3BICj4o.png) -->
+<img src="https://s2.loli.net/2023/05/12/F7idxEve3BICj4o.png" width="500" />
+
+<p>表 2 来自API提示数据集的说明性提示。这些都是受真实用法启发的虚构示例—参见附录A.2.1中的更多示例。</p>
+<h3 id="3-3-任务"><a href="#3-3-任务" class="headerlink" title="3.3 任务"></a>3.3 任务</h3><p>训练任务来自两个来源：(1) 由标注人员编写的提示数据集，以及 (2) 提交在 API 上的早期 InstructGPT 模型的提示数据集(见表6)。这些提示非常多样，包括生成、问题回答、对话、摘要、摘录和其他自然语言任务(见表1)。数据集的96%以上是英语，但是在第4.3节中，作者还探索了模型对其他语言的指令做出响应和完成编码任务的能力。</p>
+<p>对于每个自然语言提示，任务通常直接通过自然语言指令(例如“写一个关于聪明青蛙的故事”)来指定，但是也可以间接地通过少数几个例子(例如给出两个青蛙故事的例子，并提示模型生成一个新的例子)或者隐式延续(例如提供关于青蛙的故事的开始)。在每一种情况下，作者要求标注人员尽最大努力去推断该提示的用户的意图，并要求他们跳过任务非常不清楚的输入。此外，标注者还需要考虑到隐含的意图，如回应的真实性，以及潜在的有害输出，如有偏见或有毒的语言，由作者提供给他们的指示(见附录B)和他们的最佳判断来指导。</p>
+<h3 id="3-4-人类数据收集"><a href="#3-4-人类数据收集" class="headerlink" title="3.4 人类数据收集"></a>3.4 人类数据收集</h3><p>为了生成演示和比较数据，并进行评估，作者在Upwork上以及通过ScaleAI雇佣了一个由大约40名人员组成的团队。与收集关于概括任务的人类偏好数据的早期工作相比，本文的输入跨越更广泛的任务范围，有时可能包括有争议和敏感的话题。作者的目的是选择一组对不同人群的偏好敏感并且善于识别潜在有害的输出的标注人员。因此，作者进行了筛选测试，旨在衡量标注人员在这些纬度上的表现。作者选择了在这个测试中表现良好的标注人员；有关作者的选择过程和标注人员统计数据的更多信息，请参见附录B.1。</p>
+<p>在训练和评估期间，本文的对齐标准可能会发生冲突：例如，当用户请求一个潜在有害的响应时。在训练期间，本文优先考虑对用户的帮助(如果不这样做就需要做出一些困难的设计决定，作者打算留给未来的工作；更多讨论见第5.4节)。然而，在最终评估中，作者团队要求标注人员优先考虑真实性和无害性(因为这是本文真正关心的)。</p>
+<p>遵从之前的工作，作者团队在项目过程中与标注人员密切合作。作者团队通过一个入职流程来培训项目标签员，为每项任务编写详细说明(参见附录B.2)，并在共享聊天室回答标签员的问题。</p>
+<p>为了观察模型如何推广到其他标注人员的偏好的，作者团队雇用了另外一组单独的标注人员，他们不产生任何训练数据。这些标注人员来自相同的供应商，但没有经过筛选测试。</p>
+<p>尽管任务很复杂，本文发现标注者之间的一致率相当高：训练标注者之间的一致率为72.6±1.5%，而相对于留出标注者之间的一致率为77.3±1.3%。相比之下，在Stiennon等人(2020年)的总结工作中，研究人员之间的一致率为73.4%。</p>
+<h3 id="3-5-模型"><a href="#3-5-模型" class="headerlink" title="3.5 模型"></a>3.5 模型</h3><p>本文从GPT-3预训练语言模型开始。这些模型是在广泛分布的互联网数据上训练的，并且适用于广泛的下游任务，但是具有较差的特征行为。从这些模型开始，本文用三种不同的技术训练模型:</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://joizhang.github.io/2023/04/01/InstructGPT-%E8%AE%BA%E7%BF%BB%E8%AF%91%E4%B8%8E%E8%A7%A3%E8%AF%BB/" data-id="clhkn8qsf0000gll16y679aa1" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ChatGPT/" rel="tag">ChatGPT</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2023/03/22/%E4%BD%BF%E7%94%A8-Phoronix-Test-Suite-%E6%B5%8B%E8%AF%95-Ubuntu-%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%80%A7%E8%83%BD/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">使用 Phoronix Test Suite 测试 Ubuntu 服务器性能</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ChatGPT/" rel="tag">ChatGPT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Netty/" rel="tag">Netty</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TCP/" rel="tag">TCP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%80%A7%E8%83%BD/" rel="tag">性能</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/ChatGPT/" style="font-size: 10px;">ChatGPT</a> <a href="/tags/Java/" style="font-size: 10px;">Java</a> <a href="/tags/Netty/" style="font-size: 10px;">Netty</a> <a href="/tags/TCP/" style="font-size: 10px;">TCP</a> <a href="/tags/%E6%80%A7%E8%83%BD/" style="font-size: 10px;">性能</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/04/">April 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/03/">March 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/02/">February 2023</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2023/04/01/InstructGPT-%E8%AE%BA%E7%BF%BB%E8%AF%91%E4%B8%8E%E8%A7%A3%E8%AF%BB/">InstructGPT 论翻译与解读</a>
+          </li>
+        
+          <li>
+            <a href="/2023/03/22/%E4%BD%BF%E7%94%A8-Phoronix-Test-Suite-%E6%B5%8B%E8%AF%95-Ubuntu-%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%80%A7%E8%83%BD/">使用 Phoronix Test Suite 测试 Ubuntu 服务器性能</a>
+          </li>
+        
+          <li>
+            <a href="/2023/02/18/Netty%E5%A6%82%E4%BD%95%E5%A4%84%E7%90%86TCP%E7%B2%98%E5%8C%85%E9%97%AE%E9%A2%98%EF%BC%9F/">Netty如何处理TCP粘包问题？</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2023 Joizhang<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

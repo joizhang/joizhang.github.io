@@ -7,15 +7,15 @@
   
   <title>使用 Phoronix Test Suite 测试 Ubuntu 服务器性能 | Joizhang&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="为后续比较不同框架的性能，需要先测试服务器的性能。本文介绍如何使用Phoronix Test Suite 测试 Ubuntu 服务器性能。  1. 安装 Phoronix Test Suite从 https:&#x2F;&#x2F;phoronix-test-suite.com&#x2F;?k&#x3D;downloads 获得最新的测试套件下载地址，使用以下命令进行下载： 1wget https:&#x2F;&#x2F;phoronix-test-su">
+  <meta name="description" content="为后续比较不同框架的性能，需要先测试服务器的性能。本文介绍如何使用Phoronix Test Suite 测试 Ubuntu 服务器性能。 1. 安装 Phoronix Test Suite从 https:&#x2F;&#x2F;phoronix-test-suite.com&#x2F;?k&#x3D;downloads 获得最新的测试套件下载地址，使用以下命令进行下载： 1wget https:&#x2F;&#x2F;phoronix-test-suit">
 <meta property="og:type" content="article">
 <meta property="og:title" content="使用 Phoronix Test Suite 测试 Ubuntu 服务器性能">
 <meta property="og:url" content="https://joizhang.github.io/2023/03/22/%E4%BD%BF%E7%94%A8-Phoronix-Test-Suite-%E6%B5%8B%E8%AF%95-Ubuntu-%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%80%A7%E8%83%BD/index.html">
 <meta property="og:site_name" content="Joizhang&#39;s blog">
-<meta property="og:description" content="为后续比较不同框架的性能，需要先测试服务器的性能。本文介绍如何使用Phoronix Test Suite 测试 Ubuntu 服务器性能。  1. 安装 Phoronix Test Suite从 https:&#x2F;&#x2F;phoronix-test-suite.com&#x2F;?k&#x3D;downloads 获得最新的测试套件下载地址，使用以下命令进行下载： 1wget https:&#x2F;&#x2F;phoronix-test-su">
+<meta property="og:description" content="为后续比较不同框架的性能，需要先测试服务器的性能。本文介绍如何使用Phoronix Test Suite 测试 Ubuntu 服务器性能。 1. 安装 Phoronix Test Suite从 https:&#x2F;&#x2F;phoronix-test-suite.com&#x2F;?k&#x3D;downloads 获得最新的测试套件下载地址，使用以下命令进行下载： 1wget https:&#x2F;&#x2F;phoronix-test-suit">
 <meta property="og:locale">
 <meta property="article:published_time" content="2023-03-22T08:20:49.000Z">
-<meta property="article:modified_time" content="2023-03-22T14:11:31.094Z">
+<meta property="article:modified_time" content="2023-05-12T11:42:46.360Z">
 <meta property="article:author" content="Joizhang">
 <meta property="article:tag" content="性能">
 <meta name="twitter:card" content="summary">
@@ -89,16 +89,14 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <blockquote>
-<p>为后续比较不同框架的性能，需要先测试服务器的性能。本文介绍如何使用Phoronix Test Suite 测试 Ubuntu 服务器性能。</p>
-</blockquote>
+        <p>为后续比较不同框架的性能，需要先测试服务器的性能。本文介绍如何使用Phoronix Test Suite 测试 Ubuntu 服务器性能。</p>
 <h2 id="1-安装-Phoronix-Test-Suite"><a href="#1-安装-Phoronix-Test-Suite" class="headerlink" title="1. 安装 Phoronix Test Suite"></a>1. 安装 Phoronix Test Suite</h2><p>从 <a target="_blank" rel="noopener" href="https://phoronix-test-suite.com/?k=downloads">https://phoronix-test-suite.com/?k=downloads</a> 获得最新的测试套件下载地址，使用以下命令进行下载：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget https://phoronix-test-suite.com/releases/repo/pts.debian/files/phoronix-test-suite_10.8.4_all.deb</span><br></pre></td></tr></table></figure>
 
+<span id="more"></span>
+
 <p>输入以下命令安装 Phoronix Test Suite：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo dpkg -i phoronix*.deb</span><br></pre></td></tr></table></figure>
-
-<span id="more"></span>
 
 <p>安装会因为仍有未满足的依赖而出错。您可以使用单个命令修复该错误并完成安装。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install -f</span><br></pre></td></tr></table></figure>
@@ -163,6 +161,15 @@
     
 <nav id="article-nav">
   
+    <a href="/2023/04/01/InstructGPT-%E8%AE%BA%E7%BF%BB%E8%AF%91%E4%B8%8E%E8%A7%A3%E8%AF%BB/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          InstructGPT 论翻译与解读
+        
+      </div>
+    </a>
+  
   
     <a href="/2023/02/18/Netty%E5%A6%82%E4%BD%95%E5%A4%84%E7%90%86TCP%E7%B2%98%E5%8C%85%E9%97%AE%E9%A2%98%EF%BC%9F/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
@@ -185,7 +192,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Netty/" rel="tag">Netty</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TCP/" rel="tag">TCP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%80%A7%E8%83%BD/" rel="tag">性能</a></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ChatGPT/" rel="tag">ChatGPT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Netty/" rel="tag">Netty</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TCP/" rel="tag">TCP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%80%A7%E8%83%BD/" rel="tag">性能</a></li></ul>
     </div>
   </div>
 
@@ -195,7 +202,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/Java/" style="font-size: 10px;">Java</a> <a href="/tags/Netty/" style="font-size: 10px;">Netty</a> <a href="/tags/TCP/" style="font-size: 10px;">TCP</a> <a href="/tags/%E6%80%A7%E8%83%BD/" style="font-size: 10px;">性能</a>
+      <a href="/tags/ChatGPT/" style="font-size: 10px;">ChatGPT</a> <a href="/tags/Java/" style="font-size: 10px;">Java</a> <a href="/tags/Netty/" style="font-size: 10px;">Netty</a> <a href="/tags/TCP/" style="font-size: 10px;">TCP</a> <a href="/tags/%E6%80%A7%E8%83%BD/" style="font-size: 10px;">性能</a>
     </div>
   </div>
 
@@ -204,7 +211,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/03/">March 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/02/">February 2023</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/04/">April 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/03/">March 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/02/">February 2023</a></li></ul>
     </div>
   </div>
 
@@ -215,6 +222,10 @@
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2023/04/01/InstructGPT-%E8%AE%BA%E7%BF%BB%E8%AF%91%E4%B8%8E%E8%A7%A3%E8%AF%BB/">InstructGPT 论翻译与解读</a>
+          </li>
         
           <li>
             <a href="/2023/03/22/%E4%BD%BF%E7%94%A8-Phoronix-Test-Suite-%E6%B5%8B%E8%AF%95-Ubuntu-%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%80%A7%E8%83%BD/">使用 Phoronix Test Suite 测试 Ubuntu 服务器性能</a>
