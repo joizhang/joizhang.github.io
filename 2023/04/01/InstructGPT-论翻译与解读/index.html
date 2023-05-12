@@ -18,7 +18,7 @@
 <meta property="og:image" content="https://s2.loli.net/2023/05/12/JOzXIqmUdx3bNeA.png">
 <meta property="og:image" content="https://s2.loli.net/2023/05/12/F7idxEve3BICj4o.png">
 <meta property="article:published_time" content="2023-04-01T04:38:45.000Z">
-<meta property="article:modified_time" content="2023-05-12T14:30:13.630Z">
+<meta property="article:modified_time" content="2023-05-12T14:37:23.035Z">
 <meta property="article:author" content="Joizhang">
 <meta property="article:tag" content="ChatGPT">
 <meta name="twitter:card" content="summary">
@@ -162,7 +162,8 @@
 <p>为了观察模型如何推广到其他标注人员的偏好的，作者团队雇用了另外一组单独的标注人员，他们不产生任何训练数据。这些标注人员来自相同的供应商，但没有经过筛选测试。</p>
 <p>尽管任务很复杂，本文发现标注者之间的一致率相当高：训练标注者之间的一致率为72.6±1.5%，而相对于留出标注者之间的一致率为77.3±1.3%。相比之下，在Stiennon等人(2020年)的总结工作中，研究人员之间的一致率为73.4%。</p>
 <h3 id="3-5-模型"><a href="#3-5-模型" class="headerlink" title="3.5 模型"></a>3.5 模型</h3><p>本文从GPT-3预训练语言模型开始。这些模型是在广泛分布的互联网数据上训练的，并且适用于广泛的下游任务，但是具有较差的特征行为。从这些模型开始，本文用三种不同的技术训练模型：</p>
-<p>监督微调(SFT)。本文使用监督学习在标注人员演示上微调GPT-3。使用余弦学习率衰减和0.2的residual dropout来训练16个轮次。本文根据验证集上的RM分数进行最终的SFT模型选择。与之前的工作类似，作者发现模型在1次迭代后对验证集损失过度拟合；然而，作者团队发现，尽管存在过度拟合，更多轮次的训练有助于RM分数和人类偏好评级的提升。</p>
+<p>**监督微调(SFT)**。本文使用监督学习在标注人员演示上微调GPT-3。使用余弦学习率衰减和0.2的residual dropout来训练16个轮次。本文根据验证集上的RM分数进行最终的SFT模型选择。与之前的工作类似，作者发现模型在1次迭代后对验证集损失过度拟合；然而，作者团队发现，尽管存在过度拟合，更多轮次的训练有助于RM分数和人类偏好评级的提升。</p>
+<p>奖励建模(RM)。从SFT模型开始，去掉最后的非嵌入层，作者训练一个模型来接收提示和响应，并输出一个标量奖励。在本文中，仅使用6B RMs，因为这节省了大量计算，并且作者发现175B RM训练可能不稳定，因此不太适合在RL期间用作值函数(有关更多详细信息，请参见附录C)。</p>
 
       
     </div>
