@@ -7,18 +7,18 @@
   
   <title>Anthropic LLM 论文翻译与解读 | Joizhang&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="题目论文名为《Training a Helpful and Harmless Assistant with Reinforcement Learning from Human Feedback》，该论文发表于 2022-04-12，论文的作者由 31 位来自 Anthropic 的研究人员组成。题目直白的翻译是“通过基于人类反馈的强化学习来训练一个有益无害的助手”。 摘要摘要开门见山，直接介绍本文">
+  <meta name="description" content="此篇博文主要结合原论文和沐神的Anthropic LLM 论文精读【论文精读·51】视频进行翻译与解读。 题目论文名为《Training a Helpful and Harmless Assistant with Reinforcement Learning from Human Feedback》，该论文发表于 2022-04-12，论文的作者由 31 位来自 Anthropic 的研究人员组成">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Anthropic LLM 论文翻译与解读">
 <meta property="og:url" content="https://joizhang.github.io/2023/05/13/Anthropic-LLM-%E8%AE%BA%E6%96%87%E7%BF%BB%E8%AF%91%E4%B8%8E%E8%A7%A3%E8%AF%BB/index.html">
 <meta property="og:site_name" content="Joizhang&#39;s blog">
-<meta property="og:description" content="题目论文名为《Training a Helpful and Harmless Assistant with Reinforcement Learning from Human Feedback》，该论文发表于 2022-04-12，论文的作者由 31 位来自 Anthropic 的研究人员组成。题目直白的翻译是“通过基于人类反馈的强化学习来训练一个有益无害的助手”。 摘要摘要开门见山，直接介绍本文">
+<meta property="og:description" content="此篇博文主要结合原论文和沐神的Anthropic LLM 论文精读【论文精读·51】视频进行翻译与解读。 题目论文名为《Training a Helpful and Harmless Assistant with Reinforcement Learning from Human Feedback》，该论文发表于 2022-04-12，论文的作者由 31 位来自 Anthropic 的研究人员组成">
 <meta property="og:locale">
 <meta property="og:image" content="https://s2.loli.net/2023/06/07/oxe3IndHWTErGyU.png">
 <meta property="og:image" content="https://s2.loli.net/2023/06/07/DtVhHQCs9brekfn.png">
 <meta property="og:image" content="https://s2.loli.net/2023/06/07/ujX8SfiTIA14bON.png">
 <meta property="article:published_time" content="2023-05-13T09:31:27.000Z">
-<meta property="article:modified_time" content="2023-06-07T12:58:39.723Z">
+<meta property="article:modified_time" content="2023-06-08T12:41:01.717Z">
 <meta property="article:author" content="Joizhang">
 <meta property="article:tag" content="LLM">
 <meta property="article:tag" content="RLHF">
@@ -94,7 +94,8 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>论文名为《Training a Helpful and Harmless Assistant with Reinforcement Learning from Human Feedback》，该论文发表于 2022-04-12，论文的作者由 31 位来自 Anthropic 的研究人员组成。题目直白的翻译是“通过基于人类反馈的强化学习来训练一个有益无害的助手”。</p>
+        <p>此篇博文主要结合原论文和沐神的<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1XY411B7nM">Anthropic LLM 论文精读【论文精读·51】</a>视频进行翻译与解读。</p>
+<h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>论文名为《Training a Helpful and Harmless Assistant with Reinforcement Learning from Human Feedback》，该论文发表于 2022-04-12，论文的作者由 31 位来自 Anthropic 的研究人员组成。题目直白的翻译是“通过基于人类反馈的强化学习来训练一个有益无害的助手”。</p>
 <h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>摘要开门见山，直接介绍本文采用偏好建模和基于人类反馈的强化学习(RLHF)的来微调语言模型，以充当有益和无害的助手。本文发现，这种对齐训练提高了几乎所有NLP评估的性能，并且与Python编码和摘要等专业技能的训练完全兼容。接着介绍本文的主要贡献：</p>
 <ol>
 <li>本文探索了一种迭代的在线训练模式，其中偏好模型和RL策略以每周一次的频率，并且采用最新的人类反馈数据更新，有效地改进了数据集和模型。<span id="more"></span></li>
@@ -114,7 +115,11 @@
 <p>HH的自然语言RLHF训练可以应用于首先在代码上被微调的模型，并且提高了它们在评估上的编程能力(大概是通过改进通用指令跟随)。本文还发现，将HH的偏好模型训练与摘要的专业技能混合不会导致HH或摘要的性能下降。因此，没有理由不将校准训练与更具体、更有价值的技能结合起来。</p>
 <p>在有益和无害之间存在矛盾，这可以在偏好建模和RLHF训练的策略级别上测量(图1)。然而，随着模型大小的增加，PMs同时在两种分布上表现得更好，并且对于有用和无害的训练数据的相对比例变得更加稳健。</p>
 <p>本文还表明，可以使用OOD检测技术来拒绝大多数奇怪和有害的请求(图22)，很少或没有有害的例子(图23)。</p>
-<h4 id="扩展、RLHF鲁棒性和迭代“在线”训练"><a href="#扩展、RLHF鲁棒性和迭代“在线”训练" class="headerlink" title="扩展、RLHF鲁棒性和迭代“在线”训练"></a>扩展、RLHF鲁棒性和迭代“在线”训练</h4><h3 id="1-2-评估和指标摘要"><a href="#1-2-评估和指标摘要" class="headerlink" title="1.2 评估和指标摘要"></a>1.2 评估和指标摘要</h3><ul>
+<h4 id="扩展、RLHF鲁棒性和迭代“在线”训练"><a href="#扩展、RLHF鲁棒性和迭代“在线”训练" class="headerlink" title="扩展、RLHF鲁棒性和迭代“在线”训练"></a>扩展、RLHF鲁棒性和迭代“在线”训练</h4><p>本文研究了作为模型和数据集大小函数的PM准确性的比例关系，并发现了大致的对数线性趋势(图7)，尽管遇到了一些特殊情况(图31和32)。</p>
+<p>本文对RLHF的鲁棒性进行了实验(见图4)。首先，将数据集分成两半，并在每一半上训练单独的偏好模型。然后，针对一个PM训练RL模型，同时使用另一个PM进行评估。本文的结论是，较大的PMs比较小的PMs更鲁棒，正如预期的那样，在RLHF训练中过拟合增加。</p>
+<p>本文发现对于大部分RLHF训练来说，KL散度的平方根和奖励近似线性相关(见图4和13)，</p>
+<p>本文研究迭代在线训练，每周更新偏好模型和RLHF策略，然后重新部署这些新的RLHF模型以与众包工作人员互动。这极大地改进了众包工作人员评估的的模型(图1)，并且极大地改进了PMs判断的数据集(图15)，在质量方面填充了上尾部。为了消除混杂因素并支持本文的结论，本文进行了额外的控制实验(图16)，保持数据集大小和其他超参数不变</p>
+<h3 id="1-2-评估和指标摘要"><a href="#1-2-评估和指标摘要" class="headerlink" title="1.2 评估和指标摘要"></a>1.2 评估和指标摘要</h3><ul>
 <li>NLP和代码评估：</li>
 <li>静态对齐评估：</li>
 <li>人工评估：</li>
@@ -122,6 +127,15 @@
 </ul>
 <h3 id="1-3-相关工作"><a href="#1-3-相关工作" class="headerlink" title="1.3 相关工作"></a>1.3 相关工作</h3><p>本小节主要介绍了 LaMDA 和 InstructGPT。两者都使用人类数据来训练大型语言模型，使其更加通用或一致。两者都使用比本文的52B模型稍大的语言模型。</p>
 <p>本文的工作不同于 InstructGPT 和 LaMDA，因为本文探索“在线”训练，即更新与众包工作人员互动的模型，以便获得质量越来越高的数据，并填充数据分布的尾部。另一个不同之处是本文对专业技能的探索，如总结和编码，本文用它来支持这样的论点，即可以在不限制能力的情况下实现对齐。本文也明确地研究了有益和无害之间的矛盾关系，就本文所知，这种矛盾关系暂未得到解决。最后，本文将更详细地探讨伸缩性和健壮性，包括在RL训练期间。也就是说，本文的程序(图 2)实际上比其他工作中使用的程序要简单一些。本文认为唯一必要的步骤是人类反馈数据收集、偏好建模和RLHF训练。</p>
+<h2 id="第二节-数据收集"><a href="#第二节-数据收集" class="headerlink" title="第二节 数据收集"></a>第二节 数据收集</h2><h2 id="第七节-讨论"><a href="#第七节-讨论" class="headerlink" title="第七节 讨论"></a>第七节 讨论</h2><p>本文已经证明，可以使用来自人类反馈的强化学习来训练语言模型，使其成为有益无害的助手。本文的RLHF训练也提高了诚实度，尽管作者团队期待其他可以做得更好的技术的出现。与最近其他大型语言模型对齐相关的工作一样，相较于简单地放大模型，RLHF大大提高了有用性和无害性。</p>
+<p>本文的对齐干预实际上增强了大型模型的能力，并且可以很容易地与专业技能(如编码或摘要)的训练相结合，而不会降低对齐或性能。参数少于10B的模型表现不同，需要为其功能支付“对齐税”。这提供了一个例子，接近最先进水平的模型可能从对齐研究中获得正确教训是必需的。</p>
+<p>本文似乎发现的总体情况——大型模型可以以相互兼容的方式学习各种各样的技能，包括对齐——似乎并不令人惊讶。以一致的方式表现只是另一种能力，许多工作表明，较大的模型更有能力，以更高的样本效率进行微调，并且不会明显遭受遗忘。虽然本文没有直接证明，但本文也期望RLHF对齐训练可以与其他目标的训练混合或先于其他目标的训练；这在未来可能是相关的，以避免中间的、不一致的人工智能系统的产生。</p>
+<p>本文确实发现了有益性和无害性之间明显的矛盾，当只评估有益性时，完全为有益性训练的模型比为HH训练的模型更受欢迎。本文认为这部分是由于数据收集过程中的微妙之处，因为很少收集数据来教导模型如何积极处理有害的请求(例如，如何成为一种“人质谈判者”)，而只是如何避免它们。本文还发现，至少在偏好模型的层面上，有益无害的矛盾感随着模型变得更大、更有能力而减弱。尽管如此，本文确实认为这种紧张是真实的，这种谨慎可能会在边际上削减模型性能。</p>
+<p>大型生成模型被称为“基础模型”。这些模型是非常有趣的研究对象，但是如果没有进一步的微调，它们可能会表现出有害的行为。本文的工作表明，对齐训练可以被纳入基础模型，而不会损害它们的实用性和多功能性，因此它可能很快成为它们定义的一部分。</p>
+<h3 id="7-1-局限性"><a href="#7-1-局限性" class="headerlink" title="7.1 局限性"></a>7.1 局限性</h3><p>虽然作者团队相信本文的结果为现有语言模型的对齐提供了一个有希望的画面，但是关于这个主题的工作仍然处于早期阶段，并且具有许多限制。正如[Thoppilan等人，2022]的作者所强调的，作者团队将本文的对齐工作视为一个正在进行的项目；工作[askel等人，2021]是第零步，本文是第一步。</p>
+<p>作者团队已经实际地将一个对齐的助手定义为一个有帮助、诚实和无害的人工智能。本文乐观地认为，在目前的能力水平下，在这里讨论的技术提供了一个合理的方法来实现有益和无害。然而，虽然本文的技术提高了模型的诚实度，但作者团队相信本文只是触及了问题的表面，其他技术可能会更有效地产生诚实的人工智能模型。</p>
+<p>此处，本文主要关注模型的平均行为。然而，即使作者团队确信本文的模型是预期中的HHH，一个明确的下一步将是试图研究和消除不良行为(尤其是危害性)，即使是在最坏的情况下。作者团队还没有解决这个问题的鲁棒性，但希望在未来研究它。随着人工智能系统的发展和在部署过程中遇到分布偏移，这只会变得更加紧迫。</p>
+<p>人工智能对齐可能很难评估，也不明确。因此，例如，虽然本文的大型RLHF训练模型在几乎所有能力评估上都比普通LMs表现更好，但人们可能希望真正有用的模型的零样本性能等于未对准模型的小样本性能。这里的逻辑是，如果一个模型真的可以“有帮助地遵循指令”，那么一个提示或解释应该足以弥合零到小样本的差距。本文离达到这种性能水平还差得很远！即使在诚实评估TruthfulQA上，本文也缩小了不到一半的差距(图5)。本文还简要调查了RLHF微调代码模型在暴露于包括错误代码的提示时是否有任何比较优势，但没有发现任何好处。人们会希望一个完全对齐的模型会尽最大努力写出正确的代码，即使给出一个错误的提示。</p>
 <p>TODO</p>
 
       
