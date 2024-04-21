@@ -64,6 +64,72 @@
       <div class="outer">
         <section id="main">
   
+    <article id="title-k0s-安装指南" class="article article-type-title" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2024/04/21/k0s-%E5%AE%89%E8%A3%85%E6%8C%87%E5%8D%97/" class="article-date">
+  <time datetime="2024-04-21T02:15:21.000Z" itemprop="datePublished">2024-04-21</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2024/04/21/k0s-%E5%AE%89%E8%A3%85%E6%8C%87%E5%8D%97/">k0s 安装指南</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>本文介绍如何使用手动方式安装 k0s 集群。</p>
+<h2 id="1-准备环境"><a href="#1-准备环境" class="headerlink" title="1. 准备环境"></a>1. 准备环境</h2><p>首先准备三台机器：</p>
+<table>
+  <tr>
+    <td>机器角色</td>
+    <td>机器 IP</td>
+    <td>操作系统</td>
+  </tr>
+  <tr>
+    <td>controller</td>
+    <td>192.168.0.211</td>
+    <td>Ubuntu 22.04.4 LTS</td>
+  </tr>
+  <tr>
+    <td>worker</td>
+    <td>192.168.0.212</td>
+    <td>Ubuntu 22.04.4 LTS</td>
+  </tr>
+  <tr>
+    <td>worker</td>
+    <td>192.168.0.213</td>
+    <td>Ubuntu 22.04.4 LTS</td>
+  </tr>
+</table>
+        
+          <p class="article-more-link">
+            <a href="/2024/04/21/k0s-%E5%AE%89%E8%A3%85%E6%8C%87%E5%8D%97/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://joizhang.github.io/2024/04/21/k0s-%E5%AE%89%E8%A3%85%E6%8C%87%E5%8D%97/" data-id="clv8x0dex00001a109rz13etd" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/k0s/" rel="tag">k0s</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/k8s/" rel="tag">k8s</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-【GatesNotes】AI-将彻底改变人们使用电脑的方式翻译" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2024/02/16/%E3%80%90GatesNotes%E3%80%91AI-%E5%B0%86%E5%BD%BB%E5%BA%95%E6%94%B9%E5%8F%98%E4%BA%BA%E4%BB%AC%E4%BD%BF%E7%94%A8%E7%94%B5%E8%84%91%E7%9A%84%E6%96%B9%E5%BC%8F%E7%BF%BB%E8%AF%91/" class="article-date">
@@ -86,11 +152,11 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>此文是关于比尔盖茨的博文<a target="_blank" rel="noopener" href="https://www.gatesnotes.com/AI-agents">代理的未来：人工智能将彻底改变您使用计算机的方式，并颠覆软件行业</a>的翻译。</p>
+        <p>此文是关于比尔盖茨的博文<a target="_blank" rel="noopener" href="https://www.gatesnotes.com/AI-agents">代理的未来：人工智能将彻底改变您使用计算机的方式，并颠覆软件行业</a>的翻译。我觉得这是一篇能让人工智能爱好者热血沸腾的文章。</p>
 <p>直到今天，我仍然像当初和保罗·艾伦一起创办微软时一样热爱软件。但是，尽管自那以后的几十年里软件改进了许多，但在很多方面，软件仍然相当笨拙。</p>
-<p>在计算机上执行任何任务时，您必须告诉设备要使用哪个应用程序。您可以使用Microsoft Word和Google Docs起草商业计划书，但它们无法帮助您发送电子邮件，分享自拍，分析数据，安排聚会或购买电影票。即使最好的网站也不能完全了解您的工作、个人生活、兴趣和关系，它们利用这些信息为您做事的能力有限。这种事情今天只能由另一个人来完成，比如密友或个人助理。</p>
+<p>在计算机上执行任何任务时，您必须告诉设备要使用哪个应用程序。您可以使用 Microsoft Word 和 Google Docs 起草商业计划书，但它们无法帮助您发送电子邮件，分享自拍，分析数据，安排聚会或购买电影票。即使最好的网站也不能完全了解您的工作、个人生活、兴趣和关系，它们利用这些信息为您做事的能力有限。这种事情今天只能由另一个人来完成，比如密友或个人助理。</p>
 <p>在未来五年中，这种情况将发生彻底改变。您不必再为不同的任务使用不同的应用程序。您只需用日常语言告诉设备您要做什么。而且，根据您选择与其共享的信息量，该软件将能够做出个性化响应，因为它将深入了解您的生活。在不久的将来，任何在线的人都能拥有由人工智能驱动的个人助理，其技术将远超当今的技术。</p>
-<p>这种称为”agent“（代理）的软件可以响应自然语言，并能够根据其对用户的了解来完成许多不同的任务。近30年来，我一直在思考代理的问题，并在1995年出版的《未来之路》一书中提到过它们，但由于人工智能的进步，它们直到最近才变得实用。</p>
+<p>这种称为”agent“（代理）的软件可以响应自然语言，并能够根据其对用户的了解来完成许多不同的任务。近 30 年来，我一直在思考代理的问题，并在 1995 年出版的《未来之路》一书中提到过它们，但由于人工智能的进步，它们直到最近才变得实用。</p>
 <p>代理不仅会改变每个人与计算机的交互方式。它们还将颠覆软件行业，带来计算机领域从输入命令转变为点击图标以来最大的革命。</p>
         
           <p class="article-more-link">
@@ -136,7 +202,7 @@
       
         <h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>论文名为《LLAMA 2: Open Foundation and Fine-Tuned Chat Models》，该论文发表于 2023-07-19，论文的作者由 68 位来自 GenAI, Meta 的研究人员组成。题目直白的翻译是“LLAMA 2：开源基座以及经过微调的聊天模型”。</p>
 <h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>摘要主要介绍本文的主要贡献：</p>
-<p>作者团队开发并发布了 LLAMA 2，这是一组经过预训练和微调的大型语言模型(LLM)的集合，其参数范围从70亿到700亿。本文的微调LLM称为Llama 2-Chat，针对对话用例进行了优化。在大多数基准上，本文的模型优于开源聊天模型，并且基于对有用性和安全性的人类评估，可能是闭源模型的合适替代品。本文详细描述了对Llama 2-Chat进行微调和安全改进的方法，以使社区能够以本文的工作为基础，为LLM的可靠发展做出贡献。</p>
+<p>作者团队开发并发布了 LLAMA 2，这是一组经过预训练和微调的大型语言模型(LLM)的集合，其参数范围从 70 亿到 700 亿。本文的微调 LLM 称为 Llama 2-Chat，针对对话用例进行了优化。在大多数基准上，本文的模型优于开源聊天模型，并且基于对有用性和安全性的人类评估，可能是闭源模型的合适替代品。本文详细描述了对 Llama 2-Chat 进行微调和安全改进的方法，以使社区能够以本文的工作为基础，为 LLM 的可靠发展做出贡献。</p>
 
       
     </div>
@@ -177,9 +243,9 @@
       
         <p>此篇博文主要结合原论文和沐神的<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1XY411B7nM">Anthropic LLM 论文精读【论文精读·51】</a>视频进行翻译与解读。</p>
 <h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>论文名为《Training a Helpful and Harmless Assistant with Reinforcement Learning from Human Feedback》，该论文发布于 2022-04-12，论文的作者由 31 位来自 Anthropic 的研究人员组成。题目直白的翻译是“通过基于人类反馈的强化学习来训练一个有益无害的助手”。</p>
-<h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>摘要开门见山，直接介绍本文采用偏好建模和基于人类反馈的强化学习(RLHF)的来微调语言模型，以充当有益和无害的助手。本文发现，这种对齐训练提高了几乎所有NLP评估的性能，并且与Python编码和摘要等专业技能的训练完全兼容。接着介绍本文的主要贡献：</p>
+<h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>摘要开门见山，直接介绍本文采用偏好建模和基于人类反馈的强化学习(RLHF)的来微调语言模型，以充当有益和无害的助手。本文发现，这种对齐训练提高了几乎所有 NLP 评估的性能，并且与 Python 编码和摘要等专业技能的训练完全兼容。接着介绍本文的主要贡献：</p>
 <ol>
-<li>本文探索了一种迭代的在线训练模式，其中偏好模型和RL策略以每周一次的频率，并且采用最新的人类反馈数据更新，有效地改进了数据集和模型。
+<li>本文探索了一种迭代的在线训练模式，其中偏好模型和 RL 策略以每周一次的频率，并且采用最新的人类反馈数据更新，有效地改进了数据集和模型。
         
           <p class="article-more-link">
             <a href="/2023/05/13/Anthropic-LLM-%E8%AE%BA%E6%96%87%E7%BF%BB%E8%AF%91%E4%B8%8E%E8%A7%A3%E8%AF%BB/#more">Read More</a>
@@ -267,7 +333,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>为后续比较不同框架的性能，需要先测试服务器的性能。本文介绍如何使用Phoronix Test Suite 测试 Ubuntu 服务器性能。</p>
+        <p>为后续比较不同框架的性能，需要先测试服务器的性能。本文介绍如何使用 Phoronix Test Suite 测试 Ubuntu 服务器性能。</p>
 <h2 id="1-安装-Phoronix-Test-Suite"><a href="#1-安装-Phoronix-Test-Suite" class="headerlink" title="1. 安装 Phoronix Test Suite"></a>1. 安装 Phoronix Test Suite</h2><p>从 <a target="_blank" rel="noopener" href="https://phoronix-test-suite.com/?k=downloads">https://phoronix-test-suite.com/?k=downloads</a> 获得最新的测试套件下载地址，使用以下命令进行下载：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget https://phoronix-test-suite.com/releases/repo/pts.debian/files/phoronix-test-suite_10.8.4_all.deb</span><br></pre></td></tr></table></figure>
         
@@ -312,9 +378,9 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>在开发<a target="_blank" rel="noopener" href="https://github.com/joizhang/naive-rpc">naive-rpc</a>过程中需要处理TCP粘包的问题，此处结合网上的一些资料进行了总结。</p>
-<h2 id="1-为什么TCP协议有粘包问题？"><a href="#1-为什么TCP协议有粘包问题？" class="headerlink" title="1. 为什么TCP协议有粘包问题？"></a>1. 为什么TCP协议有粘包问题？</h2><p>当应用层协议使用TCP协议传输数据时，TCP协议可能会将应用层发送的数据拆分成多个包依次发送，而数据的接收方收到的数据段可能由多个”应用层包“组成，因此当应用层从TCP缓冲区读取数据并发现粘包时，需要将收到的数据进行拆分。</p>
-<p>粘包不是TCP协议造成的，而是应用层协议设计者对TCP协议的理解不够深入，他们忽略了TCP协议的定义，缺乏设计应用层协议的经验。在本文中，我们将从TCP协议和应用层协议两个方面来分析粘性数据包是如何在我们经常提到的TCP协议中出现的。</p>
+        <p>在开发<a target="_blank" rel="noopener" href="https://github.com/joizhang/naive-rpc">naive-rpc</a>过程中需要处理 TCP 粘包的问题，此处结合网上的一些资料进行了总结。</p>
+<h2 id="1-为什么-TCP-协议有粘包问题？"><a href="#1-为什么-TCP-协议有粘包问题？" class="headerlink" title="1. 为什么 TCP 协议有粘包问题？"></a>1. 为什么 TCP 协议有粘包问题？</h2><p>当应用层协议使用 TCP 协议传输数据时，TCP 协议可能会将应用层发送的数据拆分成多个包依次发送，而数据的接收方收到的数据段可能由多个”应用层包“组成，因此当应用层从 TCP 缓冲区读取数据并发现粘包时，需要将收到的数据进行拆分。</p>
+<p>粘包不是 TCP 协议造成的，而是应用层协议设计者对 TCP 协议的理解不够深入，他们忽略了 TCP 协议的定义，缺乏设计应用层协议的经验。在本文中，我们将从 TCP 协议和应用层协议两个方面来分析粘性数据包是如何在我们经常提到的 TCP 协议中出现的。</p>
         
           <p class="article-more-link">
             <a href="/2023/02/18/Netty%E5%A6%82%E4%BD%95%E5%A4%84%E7%90%86TCP%E7%B2%98%E5%8C%85%E9%97%AE%E9%A2%98%EF%BC%9F/#more">Read More</a>
@@ -348,7 +414,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AI/" rel="tag">AI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Agent/" rel="tag">Agent</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ChatGPT/" rel="tag">ChatGPT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LLM/" rel="tag">LLM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Netty/" rel="tag">Netty</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RLHF/" rel="tag">RLHF</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TCP/" rel="tag">TCP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%80%A7%E8%83%BD/" rel="tag">性能</a></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AI/" rel="tag">AI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Agent/" rel="tag">Agent</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ChatGPT/" rel="tag">ChatGPT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LLM/" rel="tag">LLM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Netty/" rel="tag">Netty</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RLHF/" rel="tag">RLHF</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TCP/" rel="tag">TCP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/k0s/" rel="tag">k0s</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/k8s/" rel="tag">k8s</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%80%A7%E8%83%BD/" rel="tag">性能</a></li></ul>
     </div>
   </div>
 
@@ -358,7 +424,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/AI/" style="font-size: 10px;">AI</a> <a href="/tags/Agent/" style="font-size: 10px;">Agent</a> <a href="/tags/ChatGPT/" style="font-size: 10px;">ChatGPT</a> <a href="/tags/Java/" style="font-size: 10px;">Java</a> <a href="/tags/LLM/" style="font-size: 20px;">LLM</a> <a href="/tags/Netty/" style="font-size: 10px;">Netty</a> <a href="/tags/RLHF/" style="font-size: 20px;">RLHF</a> <a href="/tags/TCP/" style="font-size: 10px;">TCP</a> <a href="/tags/%E6%80%A7%E8%83%BD/" style="font-size: 10px;">性能</a>
+      <a href="/tags/AI/" style="font-size: 10px;">AI</a> <a href="/tags/Agent/" style="font-size: 10px;">Agent</a> <a href="/tags/ChatGPT/" style="font-size: 10px;">ChatGPT</a> <a href="/tags/Java/" style="font-size: 10px;">Java</a> <a href="/tags/LLM/" style="font-size: 20px;">LLM</a> <a href="/tags/Netty/" style="font-size: 10px;">Netty</a> <a href="/tags/RLHF/" style="font-size: 20px;">RLHF</a> <a href="/tags/TCP/" style="font-size: 10px;">TCP</a> <a href="/tags/k0s/" style="font-size: 10px;">k0s</a> <a href="/tags/k8s/" style="font-size: 10px;">k8s</a> <a href="/tags/%E6%80%A7%E8%83%BD/" style="font-size: 10px;">性能</a>
     </div>
   </div>
 
@@ -367,7 +433,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/02/">February 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/07/">July 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/05/">May 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/04/">April 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/03/">March 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/02/">February 2023</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/04/">April 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/02/">February 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/07/">July 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/05/">May 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/04/">April 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/03/">March 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/02/">February 2023</a></li></ul>
     </div>
   </div>
 
@@ -378,6 +444,10 @@
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2024/04/21/k0s-%E5%AE%89%E8%A3%85%E6%8C%87%E5%8D%97/">k0s 安装指南</a>
+          </li>
         
           <li>
             <a href="/2024/02/16/%E3%80%90GatesNotes%E3%80%91AI-%E5%B0%86%E5%BD%BB%E5%BA%95%E6%94%B9%E5%8F%98%E4%BA%BA%E4%BB%AC%E4%BD%BF%E7%94%A8%E7%94%B5%E8%84%91%E7%9A%84%E6%96%B9%E5%BC%8F%E7%BF%BB%E8%AF%91/">【GatesNotes】AI 将彻底改变人们使用电脑的方式翻译</a>
@@ -393,10 +463,6 @@
         
           <li>
             <a href="/2023/04/01/InstructGPT-%E8%AE%BA%E6%96%87%E7%BF%BB%E8%AF%91%E4%B8%8E%E8%A7%A3%E8%AF%BB/">InstructGPT 论文翻译与解读</a>
-          </li>
-        
-          <li>
-            <a href="/2023/03/22/%E4%BD%BF%E7%94%A8-Phoronix-Test-Suite-%E6%B5%8B%E8%AF%95-Ubuntu-%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%80%A7%E8%83%BD/">使用 Phoronix Test Suite 测试 Ubuntu 服务器性能</a>
           </li>
         
       </ul>

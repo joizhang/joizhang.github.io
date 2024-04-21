@@ -7,16 +7,16 @@
   
   <title>Netty如何处理TCP粘包问题？ | Joizhang&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="在开发naive-rpc过程中需要处理TCP粘包的问题，此处结合网上的一些资料进行了总结。 1. 为什么TCP协议有粘包问题？当应用层协议使用TCP协议传输数据时，TCP协议可能会将应用层发送的数据拆分成多个包依次发送，而数据的接收方收到的数据段可能由多个”应用层包“组成，因此当应用层从TCP缓冲区读取数据并发现粘包时，需要将收到的数据进行拆分。 粘包不是TCP协议造成的，而是应用层协议设计者对T">
+  <meta name="description" content="在开发naive-rpc过程中需要处理 TCP 粘包的问题，此处结合网上的一些资料进行了总结。 1. 为什么 TCP 协议有粘包问题？当应用层协议使用 TCP 协议传输数据时，TCP 协议可能会将应用层发送的数据拆分成多个包依次发送，而数据的接收方收到的数据段可能由多个”应用层包“组成，因此当应用层从 TCP 缓冲区读取数据并发现粘包时，需要将收到的数据进行拆分。 粘包不是 TCP 协议造成的，而">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Netty如何处理TCP粘包问题？">
 <meta property="og:url" content="https://joizhang.github.io/2023/02/18/Netty%E5%A6%82%E4%BD%95%E5%A4%84%E7%90%86TCP%E7%B2%98%E5%8C%85%E9%97%AE%E9%A2%98%EF%BC%9F/index.html">
 <meta property="og:site_name" content="Joizhang&#39;s blog">
-<meta property="og:description" content="在开发naive-rpc过程中需要处理TCP粘包的问题，此处结合网上的一些资料进行了总结。 1. 为什么TCP协议有粘包问题？当应用层协议使用TCP协议传输数据时，TCP协议可能会将应用层发送的数据拆分成多个包依次发送，而数据的接收方收到的数据段可能由多个”应用层包“组成，因此当应用层从TCP缓冲区读取数据并发现粘包时，需要将收到的数据进行拆分。 粘包不是TCP协议造成的，而是应用层协议设计者对T">
+<meta property="og:description" content="在开发naive-rpc过程中需要处理 TCP 粘包的问题，此处结合网上的一些资料进行了总结。 1. 为什么 TCP 协议有粘包问题？当应用层协议使用 TCP 协议传输数据时，TCP 协议可能会将应用层发送的数据拆分成多个包依次发送，而数据的接收方收到的数据段可能由多个”应用层包“组成，因此当应用层从 TCP 缓冲区读取数据并发现粘包时，需要将收到的数据进行拆分。 粘包不是 TCP 协议造成的，而">
 <meta property="og:locale">
 <meta property="og:image" content="https://s2.loli.net/2023/02/18/rwbaAfZIQNHOLey.png">
 <meta property="article:published_time" content="2023-02-18T13:18:20.000Z">
-<meta property="article:modified_time" content="2023-05-23T12:41:52.661Z">
+<meta property="article:modified_time" content="2024-04-21T02:16:55.430Z">
 <meta property="article:author" content="Joizhang">
 <meta property="article:tag" content="Java">
 <meta property="article:tag" content="Netty">
@@ -93,29 +93,29 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>在开发<a target="_blank" rel="noopener" href="https://github.com/joizhang/naive-rpc">naive-rpc</a>过程中需要处理TCP粘包的问题，此处结合网上的一些资料进行了总结。</p>
-<h2 id="1-为什么TCP协议有粘包问题？"><a href="#1-为什么TCP协议有粘包问题？" class="headerlink" title="1. 为什么TCP协议有粘包问题？"></a>1. 为什么TCP协议有粘包问题？</h2><p>当应用层协议使用TCP协议传输数据时，TCP协议可能会将应用层发送的数据拆分成多个包依次发送，而数据的接收方收到的数据段可能由多个”应用层包“组成，因此当应用层从TCP缓冲区读取数据并发现粘包时，需要将收到的数据进行拆分。</p>
-<p>粘包不是TCP协议造成的，而是应用层协议设计者对TCP协议的理解不够深入，他们忽略了TCP协议的定义，缺乏设计应用层协议的经验。在本文中，我们将从TCP协议和应用层协议两个方面来分析粘性数据包是如何在我们经常提到的TCP协议中出现的。</p>
+        <p>在开发<a target="_blank" rel="noopener" href="https://github.com/joizhang/naive-rpc">naive-rpc</a>过程中需要处理 TCP 粘包的问题，此处结合网上的一些资料进行了总结。</p>
+<h2 id="1-为什么-TCP-协议有粘包问题？"><a href="#1-为什么-TCP-协议有粘包问题？" class="headerlink" title="1. 为什么 TCP 协议有粘包问题？"></a>1. 为什么 TCP 协议有粘包问题？</h2><p>当应用层协议使用 TCP 协议传输数据时，TCP 协议可能会将应用层发送的数据拆分成多个包依次发送，而数据的接收方收到的数据段可能由多个”应用层包“组成，因此当应用层从 TCP 缓冲区读取数据并发现粘包时，需要将收到的数据进行拆分。</p>
+<p>粘包不是 TCP 协议造成的，而是应用层协议设计者对 TCP 协议的理解不够深入，他们忽略了 TCP 协议的定义，缺乏设计应用层协议的经验。在本文中，我们将从 TCP 协议和应用层协议两个方面来分析粘性数据包是如何在我们经常提到的 TCP 协议中出现的。</p>
 <span id="more"></span>
 
 <ul>
-<li>TCP协议是面向字节流的协议，它可以合并或拆分应用层协议的数据。</li>
+<li>TCP 协议是面向字节流的协议，它可以合并或拆分应用层协议的数据。</li>
 <li>应用层协议没有定义消息的边界，导致数据的接收者不能缝合数据。</li>
 </ul>
-<p>TCP协议是面向连接的、可靠的、基于字节流的传输层通信协议。在某些情况下，应用层交给TCP协议的数据并不是作为一个消息整体传输到目的主机；这些数据被组合成一数据段并发送到目的主机。</p>
-<h3 id="1-1-面向字节流的"><a href="#1-1-面向字节流的" class="headerlink" title="1.1 面向字节流的"></a>1.1 面向字节流的</h3><p>Nagle算法是一种通过减少数据包数量来提高TCP传输性能的算法。由于网络带宽有限，它不会将小块数据直接发送到目的主机，而是在本地缓冲区中等待更多需要发送的数据，然后批量的发送出去。这种批量发送数据的策略降低了网络拥塞的可能性，并减少了额外的开销，尽管它会影响实时性能和网络延迟。</p>
-<p>在互联网的早期，Telnet是一个被广泛使用的应用，然而，使用Telnet产生大量的有效数据，只有1字节的负载，每个包有40字节的额外开销，带宽利用率只有~2.44%，Nagle算法就是在这种场景下设计的。</p>
-<p>当应用层协议通过TCP传输数据时，要发送的数据实际上是先写入TCP缓冲区的。如果用户开启Nagle算法，TCP协议可能不会立即发送写入的数据，而是会等到缓冲区中的数据超过最大数据段(MSS)或者之前的数据段被确认后，再发送缓冲区中的数据。</p>
+<p>TCP 协议是面向连接的、可靠的、基于字节流的传输层通信协议。在某些情况下，应用层交给 TCP 协议的数据并不是作为一个消息整体传输到目的主机；这些数据被组合成一数据段并发送到目的主机。</p>
+<h3 id="1-1-面向字节流的"><a href="#1-1-面向字节流的" class="headerlink" title="1.1 面向字节流的"></a>1.1 面向字节流的</h3><p>Nagle 算法是一种通过减少数据包数量来提高 TCP 传输性能的算法。由于网络带宽有限，它不会将小块数据直接发送到目的主机，而是在本地缓冲区中等待更多需要发送的数据，然后批量的发送出去。这种批量发送数据的策略降低了网络拥塞的可能性，并减少了额外的开销，尽管它会影响实时性能和网络延迟。</p>
+<p>在互联网的早期，Telnet 是一个被广泛使用的应用，然而，使用 Telnet 产生大量的有效数据，只有 1 字节的负载，每个包有 40 字节的额外开销，带宽利用率只有~2.44%，Nagle 算法就是在这种场景下设计的。</p>
+<p>当应用层协议通过 TCP 传输数据时，要发送的数据实际上是先写入 TCP 缓冲区的。如果用户开启 Nagle 算法，TCP 协议可能不会立即发送写入的数据，而是会等到缓冲区中的数据超过最大数据段(MSS)或者之前的数据段被确认后，再发送缓冲区中的数据。</p>
 <p><img src="https://s2.loli.net/2023/02/18/rwbaAfZIQNHOLey.png" alt="Naggle算法"></p>
-<p>网络拥塞是几十年前的问题，但今天的网络带宽资源不像过去那样紧张，并且默认情况下，Linux内核使用以下代码默认禁用Nagle算法。</p>
+<p>网络拥塞是几十年前的问题，但今天的网络带宽资源不像过去那样紧张，并且默认情况下，Linux 内核使用以下代码默认禁用 Nagle 算法。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">TCP_NODELAY = 1</span><br></pre></td></tr></table></figure>
 
-<p>Nagle算法确实提高了网络带宽利用率，减少了数据包较小时TCP和IP协议头的额外开销，但使用这种算法也可能导致应用层协议多次写入的数据被合并或拆分发送，当接收方从TCP栈中读取数据，发现同一段中有不相关的数据时，应用层协议可能没有办法拆分重组。</p>
-<p>除了Nagle算法，TCP栈中还有另一个延迟发送数据的选项，TCP_CORK。如果我们打开这个选项，那么当发送的数据小于MSS时，TCP协议将延迟200ms发送数据，或者等待缓冲区中的数据超过MSS。</p>
-<p>TCP_NODELAY和TCP_CORK都是通过延迟数据的发送来提高带宽利用率的，它们对应用层协议写的数据进行拆分和重组，而这些机制和配置之所以可能的最重要的原因是——TCP协议是基于字节流的协议，它本身没有包的概念，不按包发送数据。</p>
-<h3 id="1-2-找出消息边界"><a href="#1-2-找出消息边界" class="headerlink" title="1.2 找出消息边界"></a>1.2 找出消息边界</h3><p>如果我们已经系统的学习了TCP协议和基于TCP的应用层协议的设计，那么设计一个可以被TCP栈任意拆分组装成包的应用层协议就没有问题了。由于TCP协议是基于字节流的，这实际上意味着应用层协议必须绘制自己的消息边界。</p>
-<p>如果能在应用层协议中定义消息的边界，那么无论TCP协议如何拆分重组应用层协议的包过程，接收端都能根据协议的规则恢复出相应的消息。</p>
-<h2 id="2-Netty如何处理TCP粘包问题？"><a href="#2-Netty如何处理TCP粘包问题？" class="headerlink" title="2. Netty如何处理TCP粘包问题？"></a>2. Netty如何处理TCP粘包问题？</h2><h3 id="2-1-消息边界"><a href="#2-1-消息边界" class="headerlink" title="2.1 消息边界"></a>2.1 消息边界</h3><table>
+<p>Nagle 算法确实提高了网络带宽利用率，减少了数据包较小时 TCP 和 IP 协议头的额外开销，但使用这种算法也可能导致应用层协议多次写入的数据被合并或拆分发送，当接收方从 TCP 栈中读取数据，发现同一段中有不相关的数据时，应用层协议可能没有办法拆分重组。</p>
+<p>除了 Nagle 算法，TCP 栈中还有另一个延迟发送数据的选项，TCP_CORK。如果我们打开这个选项，那么当发送的数据小于 MSS 时，TCP 协议将延迟 200ms 发送数据，或者等待缓冲区中的数据超过 MSS。</p>
+<p>TCP_NODELAY 和 TCP_CORK 都是通过延迟数据的发送来提高带宽利用率的，它们对应用层协议写的数据进行拆分和重组，而这些机制和配置之所以可能的最重要的原因是——TCP 协议是基于字节流的协议，它本身没有包的概念，不按包发送数据。</p>
+<h3 id="1-2-找出消息边界"><a href="#1-2-找出消息边界" class="headerlink" title="1.2 找出消息边界"></a>1.2 找出消息边界</h3><p>如果我们已经系统的学习了 TCP 协议和基于 TCP 的应用层协议的设计，那么设计一个可以被 TCP 栈任意拆分组装成包的应用层协议就没有问题了。由于 TCP 协议是基于字节流的，这实际上意味着应用层协议必须绘制自己的消息边界。</p>
+<p>如果能在应用层协议中定义消息的边界，那么无论 TCP 协议如何拆分重组应用层协议的包过程，接收端都能根据协议的规则恢复出相应的消息。</p>
+<h2 id="2-Netty-如何处理-TCP-粘包问题？"><a href="#2-Netty-如何处理-TCP-粘包问题？" class="headerlink" title="2. Netty 如何处理 TCP 粘包问题？"></a>2. Netty 如何处理 TCP 粘包问题？</h2><h3 id="2-1-消息边界"><a href="#2-1-消息边界" class="headerlink" title="2.1 消息边界"></a>2.1 消息边界</h3><table>
     <tr>
         <th colspan=2 width="30%">方式\比较</th>
         <th width="20%">寻找消息边界方式</th>
@@ -183,9 +183,9 @@
     </tr>
 </table>
 
-<h2 id="3-关于UDP"><a href="#3-关于UDP" class="headerlink" title="3. 关于UDP"></a>3. 关于UDP</h2><p>UDP 像邮寄的包裹，虽然一次运输多个，但每个包裹都有“界限”，一个一个签收，所以无粘包、半包问题。</p>
+<h2 id="3-关于-UDP"><a href="#3-关于-UDP" class="headerlink" title="3. 关于 UDP"></a>3. 关于 UDP</h2><p>UDP 像邮寄的包裹，虽然一次运输多个，但每个包裹都有“界限”，一个一个签收，所以无粘包、半包问题。</p>
 <h2 id="4-参考"><a href="#4-参考" class="headerlink" title="4. 参考"></a>4. 参考</h2><p><a target="_blank" rel="noopener" href="https://www.sobyte.net/post/2021-12/whys-the-design-tcp-message-frame/">https://www.sobyte.net/post/2021-12/whys-the-design-tcp-message-frame/</a></p>
-<p><a target="_blank" rel="noopener" href="https://time.geekbang.org/course/intro/100036701">Netty 源码剖析与实战第12、13讲</a></p>
+<p><a target="_blank" rel="noopener" href="https://time.geekbang.org/course/intro/100036701">Netty 源码剖析与实战第 12、13 讲</a></p>
 
       
     </div>
@@ -227,7 +227,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AI/" rel="tag">AI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Agent/" rel="tag">Agent</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ChatGPT/" rel="tag">ChatGPT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LLM/" rel="tag">LLM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Netty/" rel="tag">Netty</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RLHF/" rel="tag">RLHF</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TCP/" rel="tag">TCP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%80%A7%E8%83%BD/" rel="tag">性能</a></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AI/" rel="tag">AI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Agent/" rel="tag">Agent</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ChatGPT/" rel="tag">ChatGPT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LLM/" rel="tag">LLM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Netty/" rel="tag">Netty</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RLHF/" rel="tag">RLHF</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TCP/" rel="tag">TCP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/k0s/" rel="tag">k0s</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/k8s/" rel="tag">k8s</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%80%A7%E8%83%BD/" rel="tag">性能</a></li></ul>
     </div>
   </div>
 
@@ -237,7 +237,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/AI/" style="font-size: 10px;">AI</a> <a href="/tags/Agent/" style="font-size: 10px;">Agent</a> <a href="/tags/ChatGPT/" style="font-size: 10px;">ChatGPT</a> <a href="/tags/Java/" style="font-size: 10px;">Java</a> <a href="/tags/LLM/" style="font-size: 20px;">LLM</a> <a href="/tags/Netty/" style="font-size: 10px;">Netty</a> <a href="/tags/RLHF/" style="font-size: 20px;">RLHF</a> <a href="/tags/TCP/" style="font-size: 10px;">TCP</a> <a href="/tags/%E6%80%A7%E8%83%BD/" style="font-size: 10px;">性能</a>
+      <a href="/tags/AI/" style="font-size: 10px;">AI</a> <a href="/tags/Agent/" style="font-size: 10px;">Agent</a> <a href="/tags/ChatGPT/" style="font-size: 10px;">ChatGPT</a> <a href="/tags/Java/" style="font-size: 10px;">Java</a> <a href="/tags/LLM/" style="font-size: 20px;">LLM</a> <a href="/tags/Netty/" style="font-size: 10px;">Netty</a> <a href="/tags/RLHF/" style="font-size: 20px;">RLHF</a> <a href="/tags/TCP/" style="font-size: 10px;">TCP</a> <a href="/tags/k0s/" style="font-size: 10px;">k0s</a> <a href="/tags/k8s/" style="font-size: 10px;">k8s</a> <a href="/tags/%E6%80%A7%E8%83%BD/" style="font-size: 10px;">性能</a>
     </div>
   </div>
 
@@ -246,7 +246,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/02/">February 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/07/">July 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/05/">May 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/04/">April 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/03/">March 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/02/">February 2023</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/04/">April 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/02/">February 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/07/">July 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/05/">May 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/04/">April 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/03/">March 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/02/">February 2023</a></li></ul>
     </div>
   </div>
 
@@ -257,6 +257,10 @@
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2024/04/21/k0s-%E5%AE%89%E8%A3%85%E6%8C%87%E5%8D%97/">k0s 安装指南</a>
+          </li>
         
           <li>
             <a href="/2024/02/16/%E3%80%90GatesNotes%E3%80%91AI-%E5%B0%86%E5%BD%BB%E5%BA%95%E6%94%B9%E5%8F%98%E4%BA%BA%E4%BB%AC%E4%BD%BF%E7%94%A8%E7%94%B5%E8%84%91%E7%9A%84%E6%96%B9%E5%BC%8F%E7%BF%BB%E8%AF%91/">【GatesNotes】AI 将彻底改变人们使用电脑的方式翻译</a>
@@ -272,10 +276,6 @@
         
           <li>
             <a href="/2023/04/01/InstructGPT-%E8%AE%BA%E6%96%87%E7%BF%BB%E8%AF%91%E4%B8%8E%E8%A7%A3%E8%AF%BB/">InstructGPT 论文翻译与解读</a>
-          </li>
-        
-          <li>
-            <a href="/2023/03/22/%E4%BD%BF%E7%94%A8-Phoronix-Test-Suite-%E6%B5%8B%E8%AF%95-Ubuntu-%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%80%A7%E8%83%BD/">使用 Phoronix Test Suite 测试 Ubuntu 服务器性能</a>
           </li>
         
       </ul>
